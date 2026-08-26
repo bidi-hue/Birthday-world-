@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Little Birthday World 🎂</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background stars -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Confetti container -->
+    <div class="confetti-layer" id="confetti"></div>
+
+
+    <!-- =========================================
+         MAIN WEBSITE
+    ========================================== -->
+
+    <main id="app">
+
+
+        <!-- =====================================
+             SCENE 1 — WELCOME
+        ====================================== -->
+
+        <section class="scene scene--active" id="welcome">
+
+            <div class="moon"></div>
+
+            <div class="welcome-card glass">
+
+                <span class="eyebrow">
+                    a tiny place made just for you
+                </span>
+
+                <h1>
+                    Is it your<br>
+                    <em>birthday?</em>
+                </h1>
+
+                <p>
+                    Come in.
+                    There's a little celebration waiting for you.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    data-next="questions"
+                >
+                    Open the door
+                    <span>✦</span>
+                </button>
+
+                <small>
+                    No sign-up. No pressure.
+                    Just a little birthday magic.
+                </small>
+
+            </div>
+
+            <div
+                class="night-lanterns"
+                aria-hidden="true"
+            >
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SCENE 2 — QUESTIONS
+        ====================================== -->
+
+        <section class="scene" id="questions">
+
+            <div class="question-card glass">
+
+                <span class="eyebrow">
+                    before the party begins
+                </span>
+
+                <h2>
+                    Tell us a little<br>
+                    about <em>your day.</em>
+                </h2>
+
+
+                <div class="form-grid">
+
+
+                    <!-- AGE -->
+
+                    <label>
+
+                        <span>
+                            What age are you turning?
+                        </span>
+
+                        <input
+                            id="age"
+                            type="number"
+                            min="1"
+                            max="120"
+                            placeholder="Your age"
+                            inputmode="numeric"
+                        >
+
+                    </label>
+
+
+
+                    <!-- CAKE -->
+
+                    <label>
+
+                        <span>
+                            What's your favourite cake?
+                        </span>
+
+                        <select id="cake">
+
+                            <option value="chocolate">
+                                Chocolate 🍫
+                            </option>
+
+                            <option value="strawberry">
+                                Strawberry 🍓
+                            </option>
+
+                            <option value="vanilla">
+                                Vanilla 🍰
+                            </option>
+
+                            <option value="blueberry">
+                                Blueberry 🫐
+                            </option>
+
+                            <option value="rainbow">
+                                Rainbow 🌈
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+
+                    <!-- GIFT -->
+
+                    <label>
+
+                        <span>
+                            What kind of gift would you like?
+                        </span>
+
+                        <select id="gift">
+
+                            <option value="cozy">
+                                Something cozy 🧸
+                            </option>
+
+                            <option value="flowers">
+                                Flowers 🌷
+                            </option>
+
+                            <option value="books">
+                                A bookish surprise 📖
+                            </option>
+
+                            <option value="stars">
+                                Something magical ✨
+                            </option>
+
+                            <option value="surprise">
+                                Surprise me 🎁
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+
+                    <!-- FLOWER -->
+
+                    <label>
+
+                        <span>
+                            Pick your birthday flowers.
+                        </span>
+
+                        <select id="flower">
+
+                            <option value="rose">
+                                Roses 🌹
+                            </option>
+
+                            <option value="tulip">
+                                Tulips 🌷
+                            </option>
+
+                            <option value="sunflower">
+                                Sunflowers 🌻
+                            </option>
+
+                            <option value="lavender">
+                                Lavender 🪻
+                            </option>
+
+                            <option value="daisy">
+                                Daisies 🌼
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+
+                    <!-- SONG -->
+
+                    <label class="full">
+
+                        <span>
+                            Would you like us to sing?
+                        </span>
+
+                        <select id="song">
+
+                            <option value="yes">
+                                Yes please 🎶
+                            </option>
+
+                            <option value="no">
+                                I'll make my wish quietly ✨
+                            </option>
+
+                        </select>
+
+                    </label>
+
+                </div>
+
+
+
+                <button
+                    class="primary-btn"
+                    id="startParty"
+                >
+                    Let's celebrate
+                    <span>♡</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SCENE 3 — BIRTHDAY PARTY
+        ====================================== -->
+
+        <section class="scene" id="party">
+
+            <div class="party-room">
+
+
+                <!-- PARTY TITLE -->
+
+                <div class="party-title">
+
+                    <span class="eyebrow">
+                        the lights are on
+                    </span>
+
+                    <h2>
+                        Welcome to your<br>
+                        <em>little party.</em>
+                    </h2>
+
+                </div>
+
+
+
+                <!-- FAIRY LIGHTS -->
+
+                <div
+                    class="string-lights"
+                    aria-hidden="true"
+                >
+
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+
+                </div>
+
+
+
+                <!-- CAKE TABLE -->
+
+                <div class="party-table">
+
+
+                    <!-- CAKE -->
+
+                    <div
+                        class="cake"
+                        id="cakeVisual"
+                    >
+
+                        <!-- Candles will be created by JavaScript -->
+                        <div
+                            class="cake-candles"
+                            id="candles"
+                        ></div>
+
+
+                        <div class="cake-top"></div>
+
+                        <div class="cake-middle"></div>
+
+                        <div class="cake-bottom"></div>
+
+                        <div class="cake-plate"></div>
+
+                    </div>
+
+
+                    <p
+                        class="cake-caption"
+                        id="cakeCaption"
+                    >
+                        Your cake is waiting.
+                    </p>
+
+                </div>
+
+
+
+                <!-- LITTLE PARTY PEOPLE -->
+
+                <div
+                    class="party-people"
+                    aria-hidden="true"
+                >
+
+                    <div class="person p1">
+                        ✦
+                    </div>
+
+                    <div class="person p2">
+                        ♡
+                    </div>
+
+                    <div class="person p3">
+                        ✿
+                    </div>
+
+                    <div class="person p4">
+                        ✦
+                    </div>
+
+                </div>
+
+
+
+                <!-- WISH BUTTON -->
+
+                <button
+                    class="primary-btn wish-btn"
+                    id="wishBtn"
+                >
+                    Make a wish ✨
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SCENE 4 — AFTER WISH
+        ====================================== -->
+
+        <section
+            class="scene"
+            id="afterWish"
+        >
+
+            <div class="celebration-card glass">
+
+                <div class="burst">
+                    ✦
+                </div>
+
+                <span class="eyebrow">
+                    and just like that…
+                </span>
+
+                <h2>
+                    Happy Birthday,<br>
+                    <em id="nameHere">
+                        Birthday Star
+                    </em>! 🎂
+                </h2>
+
+                <p id="songText">
+                    The whole little room is cheering for you.
+                </p>
+
+
+                <div
+                    class="mini-bouquet"
+                    id="miniBouquet"
+                >
+                    🌷
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    data-next="flowers"
+                >
+                    Choose your flowers
+                    <span>🌷</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SCENE 5 — FLOWERS
+        ====================================== -->
+
+        <section
+            class="scene"
+            id="flowers"
+        >
+
+            <div class="flower-card glass">
+
+                <span class="eyebrow">
+                    a bouquet, just for you
+                </span>
+
+                <h2>
+                    Pick the flowers<br>
+                    you'd <em>keep.</em>
+                </h2>
+
+                <p>
+                    Tap a flower to add it to your bouquet.
+                </p>
+
+
+
+                <!-- FLOWER OPTIONS -->
+
+                <div class="flower-options">
+
+
+                    <button
+                        data-flower="🌹"
+                        data-name="roses"
+                    >
+                        🌹
+                        <span>Roses</span>
+                    </button>
+
+
+                    <button
+                        data-flower="🌷"
+                        data-name="tulips"
+                    >
+                        🌷
+                        <span>Tulips</span>
+                    </button>
+
+
+                    <button
+                        data-flower="🌻"
+                        data-name="sunflowers"
+                    >
+                        🌻
+                        <span>Sunflowers</span>
+                    </button>
+
+
+                    <button
+                        data-flower="🪻"
+                        data-name="lavender"
+                    >
+                        🪻
+                        <span>Lavender</span>
+                    </button>
+
+
+                    <button
+                        data-flower="🌼"
+                        data-name="daisies"
+                    >
+                        🌼
+                        <span>Daisies</span>
+                    </button>
+
+
+                    <button
+                        data-flower="🌸"
+                        data-name="blossoms"
+                    >
+                        🌸
+                        <span>Blossoms</span>
+                    </button>
+
+                </div>
+
+
+
+                <!-- BOUQUET -->
+
+                <div
+                    class="bouquet-display"
+                    id="bouquetDisplay"
+                >
+
+                    <span class="bouquet-empty">
+                        Your bouquet will bloom here ♡
+                    </span>
+
+                </div>
+
+
+
+                <!-- GIFT BUTTON -->
+
+                <button
+                    class="primary-btn"
+                    id="giftBtn"
+                >
+                    Bring me my gift
+                    <span>🎁</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SCENE 6 — GIFT
+        ====================================== -->
+
+        <section
+            class="scene"
+            id="gift"
+        >
+
+            <div class="gift-card glass">
+
+                <span class="eyebrow">
+                    one last little thing
+                </span>
+
+                <h2 id="giftTitle">
+                    A gift for you.
+                </h2>
+
+                <p id="giftIntro">
+                    It isn't wrapped in paper,
+                    but we hope you keep it.
+                </p>
+
+
+
+                <!-- GIFT BOX -->
+
+                <button
+                    class="gift-box"
+                    id="openGift"
+                    aria-label="Open your birthday gift"
+                >
+
+                    <span class="gift-lid"></span>
+
+                    <span
+                        class="gift-ribbon vertical"
+                    ></span>
+
+                    <span
+                        class="gift-ribbon horizontal"
+                    ></span>
+
+                    <span class="gift-bow">
+                        ♡
+                    </span>
+
+                </button>
+
+
+
+                <!-- GIFT MESSAGE -->
+
+                <div
+                    class="gift-message"
+                    id="giftMessage"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SCENE 7 — FINAL MESSAGE
+        ====================================== -->
+
+        <section
+            class="scene"
+            id="final"
+        >
+
+            <div class="final-card">
+
+                <div class="final-stars">
+                    ✦ · ✧ · ✦
+                </div>
+
+
+                <div
+                    class="final-bouquet"
+                    id="finalBouquet"
+                >
+                    🌷🌸🌼
+                </div>
+
+
+                <h2>
+                    Maybe today is loud.<br>
+                    Maybe today is quiet.
+                </h2>
+
+
+                <p>
+                    Maybe you're celebrating with everyone
+                    you love, or maybe you're celebrating
+                    by yourself.
+                </p>
+
+
+                <p>
+                    <strong>
+                        Either way, you deserved
+                        a little celebration.
+                    </strong>
+                </p>
+
+
+                <p>
+                    So we made you one.
+                </p>
+
+
+                <div class="final-line"></div>
+
+
+                <h3>
+                    Happy Birthday,
+                    <span id="finalName">
+                        Birthday Star
+                    </span>.
+                    ♡
+                </h3>
+
+
+                <p class="tiny">
+                    We're glad you're here.
+                </p>
+
+
+                <button
+                    class="text-btn"
+                    id="restart"
+                >
+                    Visit your little party again ↺
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         BIRTHDAY MUSIC
+    ========================================== -->
+
+    <audio
+        id="birthdayAudio"
+        preload="auto"
+        loop
+    >
+
+        <source
+            src="assets/music/birthday-song.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+
+    <!-- Our JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
