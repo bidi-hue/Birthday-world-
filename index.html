@@ -10,24 +10,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="theme-color"
-        content="#17162c"
-    >
-
-    <title>
-        A Little Birthday World ✦
-    </title>
+    <title>A Little Birthday For You 🎀</title>
 
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
     >
 
     <link
@@ -47,51 +34,41 @@
 
 
     <!-- =====================================================
-         BACKGROUND DECORATIONS
+         DECORATIVE BACKGROUND
          ===================================================== -->
 
-    <div
-        class="ambient-stars"
-        id="ambient-stars"
-    ></div>
+    <div class="background-decor" aria-hidden="true">
 
+        <span class="bg-heart">♡</span>
+        <span class="bg-flower">✿</span>
+        <span class="bg-star">✦</span>
+        <span class="bg-heart">♡</span>
+        <span class="bg-flower">❀</span>
+        <span class="bg-star">✧</span>
 
-    <div
-        class="petal-field"
-        id="petal-field"
-    ></div>
-
-
-    <div
-        class="confetti-layer"
-        id="confetti"
-    ></div>
-
+    </div>
 
 
     <!-- =====================================================
          TOP BAR
          ===================================================== -->
 
-    <header
-        class="topbar"
-        id="topbar"
-    >
+    <header class="topbar">
 
         <div class="brand">
 
-            <span class="brand-mark">
-                ✦
-            </span>
+            <div class="brand-icon">
+                🎀
+            </div>
 
             <div>
 
                 <strong>
-                    A Little Birthday World
+                    A Little Birthday
                 </strong>
 
                 <small>
-                    made for whoever needs a celebration
+                    made just for you
                 </small>
 
             </div>
@@ -100,10 +77,10 @@
 
 
         <button
-            class="sound-button"
-            id="sound-toggle"
+            id="musicButton"
+            class="music-button"
             type="button"
-            aria-label="Toggle music"
+            aria-label="Toggle birthday music"
         >
             ♫
         </button>
@@ -111,539 +88,254 @@
     </header>
 
 
-
     <!-- =====================================================
          PROGRESS
          ===================================================== -->
 
-    <div
-        class="progress-wrap"
-        id="progress-wrap"
-    >
+    <div class="progress-bar">
 
         <div
+            id="progressFill"
             class="progress-fill"
-            id="progress-fill"
         ></div>
 
     </div>
 
 
-
     <!-- =====================================================
-         MAIN WORLD
+         MAIN EXPERIENCE
          ===================================================== -->
 
-    <main id="world">
-
-
-
-        <!-- =================================================
-             ROOM 00 — ENTRANCE
-             ================================================= -->
-
-        <section
-            class="room entrance active"
-            id="room-0"
-        >
-
-            <div class="moon"></div>
-
-
-            <div
-                class="entrance-curtain left"
-            ></div>
-
-
-            <div
-                class="entrance-curtain right"
-            ></div>
-
-
-            <div class="entrance-copy">
-
-                <div class="tiny-label">
-                    A tiny birthday invitation
-                </div>
-
-
-                <div class="door-glow">
-                    ✦
-                </div>
-
-
-                <h1>
-
-                    Come in.
-
-                    <br>
-
-                    <em>
-                        Your birthday is waiting.
-                    </em>
-
-                </h1>
-
-
-                <p>
-
-                    Maybe today is a big celebration.
-                    Maybe it's a quiet one.
-
-                    <br>
-
-                    Either way, we saved you a little seat.
-
-                </p>
-
-
-                <button
-                    class="main-button"
-                    id="enter-button"
-                    type="button"
-                >
-
-                    Open the door
-
-                    <span>
-                        →
-                    </span>
-
-                </button>
-
-
-                <small>
-                    No account. No sign-up. Just a little birthday magic.
-                </small>
-
-            </div>
-
-        </section>
-
+    <main id="app">
 
 
         <!-- =================================================
-             ROOM 01 — BIRTHDAY QUESTIONS
+             SCREEN 0 — WELCOME
              ================================================= -->
 
         <section
-            class="room"
-            id="room-1"
+            id="screen-0"
+            class="screen welcome-screen active"
         >
 
-            <div class="panel question-panel">
-
-                <div class="tiny-label">
-                    Before we decorate
-                </div>
-
-
-                <h2>
-
-                    Tell us about
-
-                    <br>
-
-                    <em>
-                        your birthday.
-                    </em>
-
-                </h2>
-
-
-                <p class="panel-intro">
-
-                    A few little answers help us make
-                    the party feel like yours.
-
-                </p>
-
-
-                <div class="question-grid">
-
-
-                    <!-- NAME -->
-
-                    <label>
-
-                        <span>
-                            What should we call you?
-                        </span>
-
-                        <input
-                            id="person-name"
-                            type="text"
-                            maxlength="24"
-                            placeholder="Your name"
-                        >
-
-                    </label>
-
-
-
-                    <!-- AGE -->
-
-                    <label>
-
-                        <span>
-                            What age are you turning?
-                        </span>
-
-                        <input
-                            id="person-age"
-                            type="number"
-                            min="1"
-                            max="120"
-                            placeholder="Your age"
-                            inputmode="numeric"
-                        >
-
-                    </label>
-
-
-
-                    <!-- CAKE -->
-
-                    <label>
-
-                        <span>
-                            Choose your cake
-                        </span>
-
-                        <select id="cake-choice">
-
-                            <option value="chocolate">
-                                Chocolate Truffle
-                            </option>
-
-                            <option value="strawberry">
-                                Strawberry Cream
-                            </option>
-
-                            <option value="vanilla">
-                                Vanilla Dream
-                            </option>
-
-                            <option value="blueberry">
-                                Blueberry Velvet
-                            </option>
-
-                            <option value="rainbow">
-                                Rainbow Celebration
-                            </option>
-
-                        </select>
-
-                    </label>
-
-
-
-                    <!-- MOOD -->
-
-                    <label>
-
-                        <span>
-                            Pick your party mood
-                        </span>
-
-                        <select id="mood-choice">
-
-                            <option value="dreamy">
-                                Dreamy & gentle
-                            </option>
-
-                            <option value="cozy">
-                                Warm & cozy
-                            </option>
-
-                            <option value="sparkle">
-                                Sparkly & magical
-                            </option>
-
-                            <option value="garden">
-                                Garden party
-                            </option>
-
-                        </select>
-
-                    </label>
-
-
-
-                    <!-- GIFT -->
-
-                    <label>
-
-                        <span>
-                            What gift sounds nicest?
-                        </span>
-
-                        <select id="gift-choice">
-
-                            <option value="comfort">
-                                Something comforting
-                            </option>
-
-                            <option value="flowers">
-                                A beautiful bouquet
-                            </option>
-
-                            <option value="book">
-                                A little story
-                            </option>
-
-                            <option value="stars">
-                                Something magical
-                            </option>
-
-                            <option value="surprise">
-                                Surprise me
-                            </option>
-
-                        </select>
-
-                    </label>
-
-
-
-                    <!-- SONG -->
-
-                    <label>
-
-                        <span>
-                            Want the birthday song?
-                        </span>
-
-                        <select id="song-choice">
-
-                            <option value="yes">
-                                Yes, sing for me 🎶
-                            </option>
-
-                            <option value="no">
-                                I'll make a quiet wish ✨
-                            </option>
-
-                        </select>
-
-                    </label>
-
-
-                </div>
-
-
-
-                <button
-                    class="main-button"
-                    id="prepare-button"
-                    type="button"
-                >
-
-                    Prepare my party
-
-                    <span>
-                        ✦
-                    </span>
-
-                </button>
-
-
-                <p class="privacy-note">
-
-                    Your answers stay in this browser.
-                    Nothing is sent anywhere.
-
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 02 — DARK PARTY
-             ================================================= -->
-
-        <section
-            class="room dark-party"
-            id="room-2"
-        >
-
-
-            <div class="room-window">
-
-                <span class="window-moon"></span>
-
-                <span class="window-star s1">
-                    ✦
-                </span>
-
-                <span class="window-star s2">
-                    ✧
-                </span>
-
-                <span class="window-star s3">
-                    ·
-                </span>
-
+            <div class="welcome-decoration">
+                ✿　♡　✿
             </div>
 
 
+            <div class="welcome-bow">
+                🎀
+            </div>
 
-            <div
-                class="party-scene"
-                id="party-scene"
+
+            <p class="eyebrow">
+                A tiny corner of the internet
+            </p>
+
+
+            <h1>
+                Someone should've
+                <em>made your birthday special.</em>
+            </h1>
+
+
+            <p class="welcome-text">
+
+                So I made you a little birthday world instead.
+
+                <br>
+
+                Come inside. There's a cake,
+                presents, flowers and a tiny party
+                waiting for you.
+
+            </p>
+
+
+            <button
+                id="startButton"
+                class="primary-button large-button"
+                type="button"
             >
 
+                Start my birthday
 
-                <!-- CEILING LIGHTS -->
+                <span>♡</span>
 
-                <div
-                    class="ceiling-lights"
-                    id="ceiling-lights"
-                ></div>
+            </button>
 
 
+            <p class="tiny-note">
+                You get to choose everything.
+            </p>
 
-                <!-- BANNER -->
+        </section>
 
-                <div class="wall-banner">
 
-                    HAPPY BIRTHDAY
+        <!-- =================================================
+             SCREEN 1 — ABOUT YOU
+             ================================================= -->
 
-                    <span id="banner-name">
-                        YOU
-                    </span>
+        <section
+            id="screen-1"
+            class="screen form-screen"
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-label">
+                    FIRST THINGS FIRST · 01
+                </span>
+
+                <h2>
+                    Tell me about
+                    <em>you.</em>
+                </h2>
+
+                <p>
+                    This little birthday world should actually
+                    feel like yours.
+                </p>
+
+            </div>
+
+
+            <div class="card form-card">
+
+
+                <div class="input-group">
+
+                    <label for="personName">
+                        What should we call you?
+                    </label>
+
+                    <input
+                        id="personName"
+                        type="text"
+                        maxlength="30"
+                        placeholder="Your name..."
+                        autocomplete="off"
+                    >
 
                 </div>
 
 
+                <div class="input-group">
 
-                <!-- BALLOONS -->
+                    <label for="personAge">
+                        What age are you turning?
+                    </label>
 
-                <div class="balloon balloon-a"></div>
-
-                <div class="balloon balloon-b"></div>
-
-                <div class="balloon balloon-c"></div>
-
-                <div class="balloon balloon-d"></div>
-
-
-
-                <!-- CARTOON CHARACTERS -->
-
-                <div class="character char-left">
-
-                    <div class="head">
-                        ♡
-                    </div>
-
-                    <div class="body"></div>
+                    <input
+                        id="personAge"
+                        type="number"
+                        min="1"
+                        max="120"
+                        placeholder="Your age..."
+                    >
 
                 </div>
 
 
-                <div class="character char-right">
+                <div class="input-group">
 
-                    <div class="head">
+                    <label for="birthdayTheme">
+                        Pick your birthday vibe
+                    </label>
+
+                    <select id="birthdayTheme">
+
+                        <option value="pink">
+                            Soft Pink 🎀
+                        </option>
+
+                        <option value="garden">
+                            Pretty Garden 🌷
+                        </option>
+
+                        <option value="sweet">
+                            Strawberry Sweet 🍓
+                        </option>
+
+                        <option value="dreamy">
+                            Dreamy & Magical ✨
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    id="detailsNext"
+                    class="primary-button"
+                    type="button"
+                >
+
+                    Let's go
+
+                    <span>→</span>
+
+                </button>
+
+
+                <p
+                    id="detailsError"
+                    class="form-error"
+                ></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCREEN 2 — LIGHTS OFF
+             ================================================= -->
+
+        <section
+            id="screen-2"
+            class="screen darkness-screen"
+        >
+
+            <div class="dark-room">
+
+
+                <div class="dark-window">
+
+                    <div class="window-moon"></div>
+
+                    <span>✦</span>
+                    <span>·</span>
+                    <span>✧</span>
+
+                </div>
+
+
+                <div class="dark-message">
+
+                    <div class="dark-spark">
                         ✦
                     </div>
 
-                    <div class="body"></div>
-
-                </div>
-
-
-                <div class="character char-center">
-
-                    <div class="head">
-                        ✿
-                    </div>
-
-                    <div class="body"></div>
-
-                </div>
-
-
-
-                <!-- CAKE TABLE -->
-
-                <div class="table">
-
-
-                    <div
-                        class="cake"
-                        id="cake"
-                    >
-
-
-                        <div
-                            class="candle-row"
-                            id="candle-row"
-                        ></div>
-
-
-                        <div
-                            class="cake-top"
-                            id="cake-top"
-                        ></div>
-
-
-                        <div
-                            class="cake-middle"
-                            id="cake-middle"
-                        ></div>
-
-
-                        <div
-                            class="cake-bottom"
-                            id="cake-bottom"
-                        ></div>
-
-
-                        <div class="cake-plate"></div>
-
-
-                    </div>
-
-
-                    <div class="table-cloth"></div>
-
-
-                </div>
-
-
-
-                <!-- DARK ROOM MESSAGE -->
-
-                <div
-                    class="room-dark-message"
-                    id="dark-message"
-                >
-
-                    <span class="tiny-label">
-                        The room is ready
-                    </span>
-
+                    <p>
+                        Wait...
+                    </p>
 
                     <h2>
-
-                        Something is waiting
-
-                        <br>
-
-                        <em>
-                            in the dark.
-                        </em>
-
+                        Why are the
+                        <em>lights off?</em>
                     </h2>
+
+                    <span>
+                        Someone must have forgotten
+                        about your little party.
+                    </span>
 
 
                     <button
-                        class="main-button light-button"
-                        id="lights-button"
+                        id="lightsButton"
+                        class="light-button"
                         type="button"
                     >
 
@@ -653,49 +345,162 @@
 
                 </div>
 
+            </div>
+
+        </section>
 
 
-                <!-- PARTY READY -->
+        <!-- =================================================
+             SCREEN 3 — PARTY
+             ================================================= -->
 
-                <div
-                    class="party-ready"
-                    id="party-ready"
-                >
+        <section
+            id="screen-3"
+            class="screen party-screen"
+        >
 
-                    <span class="tiny-label">
-                        Look at that.
+            <div
+                id="partyScene"
+                class="party-scene"
+            >
+
+
+                <!-- BALLOONS -->
+
+                <div class="balloon balloon-1">
+                    🎈
+                </div>
+
+                <div class="balloon balloon-2">
+                    🎈
+                </div>
+
+                <div class="balloon balloon-3">
+                    🎈
+                </div>
+
+                <div class="balloon balloon-4">
+                    🎈
+                </div>
+
+
+                <!-- PARTY BANNER -->
+
+                <div class="party-banner">
+
+                    <span>
+                        HAPPY BIRTHDAY
                     </span>
 
+                    <strong id="partyName">
+                        YOU
+                    </strong>
 
-                    <h2>
-
-                        It's your
-
-                        <br>
-
-                        <em>
-                            little party.
-                        </em>
-
-                    </h2>
+                </div>
 
 
-                    <p id="party-caption">
-                        Your cake is ready.
+                <!-- CARTOON PEOPLE -->
+
+                <div class="party-character character-left">
+
+                    <div class="character-head">
+                        ♡
+                    </div>
+
+                    <div class="character-body"></div>
+
+                </div>
+
+
+                <div class="party-character character-right">
+
+                    <div class="character-head">
+                        ✿
+                    </div>
+
+                    <div class="character-body"></div>
+
+                </div>
+
+
+                <div class="party-character character-center">
+
+                    <div class="character-head">
+                        ♡
+                    </div>
+
+                    <div class="character-body"></div>
+
+                </div>
+
+
+                <!-- CAKE TABLE -->
+
+                <div class="cake-table">
+
+                    <div class="table-cloth"></div>
+
+
+                    <div class="cake-wrapper">
+
+                        <div class="cake-plate"></div>
+
+
+                        <div class="cake">
+
+                            <div class="cake-bottom"></div>
+
+                            <div class="cake-middle"></div>
+
+                            <div class="cake-top"></div>
+
+
+                            <!-- NUMBER CANDLES
+                                 JAVASCRIPT BUILDS THESE -->
+
+                            <div
+                                id="numberCandles"
+                                class="number-candles"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PARTY MESSAGE -->
+
+                <div
+                    id="partyMessage"
+                    class="party-message"
+                >
+
+                    <p>
+                        Look who's here...
                     </p>
 
+                    <h2>
+                        It's your
+                        <em>birthday.</em>
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="partyContinue"
+                    class="party-continue"
+                >
 
                     <button
-                        class="main-button"
-                        id="wish-button"
+                        id="partyNext"
+                        class="primary-button"
                         type="button"
                     >
 
-                        Make a wish
-
-                        <span>
-                            ✦
-                        </span>
+                        I can't believe this ♡
 
                     </button>
 
@@ -707,705 +512,916 @@
         </section>
 
 
-
         <!-- =================================================
-             ROOM 03 — CELEBRATION
+             SCREEN 4 — CUSTOM CAKE
              ================================================= -->
 
         <section
-            class="room"
-            id="room-3"
+            id="screen-4"
+            class="screen customization-screen"
         >
 
-            <div class="celebration-panel">
+            <div class="screen-heading">
 
-                <div class="celebration-spark">
-                    ✦
-                </div>
-
-
-                <div class="tiny-label">
-                    The candles are out
-                </div>
-
-
-                <h2>
-
-                    Happy Birthday,
-
-                    <br>
-
-                    <em id="celebration-name">
-                        Birthday Star
-                    </em>
-
-                    ! 🎂
-
-                </h2>
-
-
-                <p id="song-status">
-
-                    The whole little room
-                    is cheering for you.
-
-                </p>
-
-
-                <div
-                    class="celebration-bouquet"
-                    id="celebration-bouquet"
-                >
-
-                    🌷 ✿ 🌸
-
-                </div>
-
-
-                <button
-                    class="main-button"
-                    id="flowers-button"
-                    type="button"
-                >
-
-                    Choose your flowers
-
-                    <span>
-                        →
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 04 — FLOWER SHOP
-             ================================================= -->
-
-        <section
-            class="room shop-room"
-            id="room-4"
-        >
-
-
-            <div class="shop-heading">
-
-                <div class="tiny-label">
-                    THE FLOWER ROOM · 01
-                </div>
-
-
-                <h2>
-
-                    Pick your
-
-                    <br>
-
-                    <em>
-                        flowers.
-                    </em>
-
-                </h2>
-
-
-                <p>
-
-                    Take as many as you like.
-                    This bouquet has no budget.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="flower-shop-scene">
-
-
-                <div class="shop-sign">
-                    THE BLOOM ROOM
-                </div>
-
-
-                <div
-                    class="flower-grid"
-                    id="flower-grid"
-                ></div>
-
-
-            </div>
-
-
-
-            <div class="shop-footer">
-
-
-                <div>
-
-                    <small>
-                        Your bouquet
-                    </small>
-
-                    <strong>
-
-                        <span id="flower-count">
-                            0
-                        </span>
-
-                        flowers
-
-                    </strong>
-
-                </div>
-
-
-                <button
-                    class="main-button small"
-                    id="greenery-button"
-                    type="button"
-                >
-
-                    Add greenery →
-
-                </button>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 05 — GREENHOUSE
-             ================================================= -->
-
-        <section
-            class="room shop-room"
-            id="room-5"
-        >
-
-
-            <div class="shop-heading">
-
-                <div class="tiny-label">
-                    GREENHOUSE · 02
-                </div>
-
-
-                <h2>
-
-                    A little
-
-                    <br>
-
-                    <em>
-                        greenery.
-                    </em>
-
-                </h2>
-
-
-                <p>
-
-                    Every good bouquet
-                    needs a little wildness.
-
-                </p>
-
-            </div>
-
-
-
-            <div
-                class="flower-shop-scene greenhouse-scene"
-            >
-
-
-                <div class="shop-sign">
-                    THE GREENHOUSE
-                </div>
-
-
-                <div
-                    class="greenery-grid"
-                    id="greenery-grid"
-                ></div>
-
-
-            </div>
-
-
-
-            <div class="shop-footer">
-
-
-                <div>
-
-                    <small>
-                        Greenery
-                    </small>
-
-                    <strong>
-
-                        <span id="greenery-count">
-                            0
-                        </span>
-
-                        pieces
-
-                    </strong>
-
-                </div>
-
-
-                <button
-                    class="main-button small"
-                    id="ribbon-button"
-                    type="button"
-                >
-
-                    Pick a ribbon →
-
-                </button>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 06 — RIBBON
-             ================================================= -->
-
-        <section
-            class="room shop-room"
-            id="room-6"
-        >
-
-
-            <div class="shop-heading">
-
-                <div class="tiny-label">
-                    RIBBON COUNTER · 03
-                </div>
-
-
-                <h2>
-
-                    Something
-
-                    <br>
-
-                    <em>
-                        pretty.
-                    </em>
-
-                </h2>
-
-
-                <p>
-
-                    Choose the little detail
-                    that holds everything together.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="selection-stage">
-
-
-                <div class="shop-sign">
-                    RIBBON COUNTER
-                </div>
-
-
-                <div
-                    class="ribbon-grid"
-                    id="ribbon-grid"
-                ></div>
-
-
-                <div
-                    class="chosen-pill"
-                    id="ribbon-preview"
-                >
-
-                    No ribbon chosen yet.
-
-                </div>
-
-
-            </div>
-
-
-
-            <button
-                class="main-button"
-                id="wrapping-button"
-                type="button"
-            >
-
-                Choose wrapping →
-
-            </button>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 07 — WRAPPING
-             ================================================= -->
-
-        <section
-            class="room shop-room"
-            id="room-7"
-        >
-
-
-            <div class="shop-heading">
-
-                <div class="tiny-label">
-                    WRAPPING STATION · 04
-                </div>
-
-
-                <h2>
-
-                    Wrap it in
-
-                    <br>
-
-                    <em>
-                        something lovely.
-                    </em>
-
-                </h2>
-
-
-                <p>
-
-                    Because the outside
-                    deserves a little love too.
-
-                </p>
-
-            </div>
-
-
-
-            <div
-                class="selection-stage wrapping-stage"
-            >
-
-
-                <div class="shop-sign">
-                    WRAPPING STATION
-                </div>
-
-
-                <div
-                    class="wrapping-grid"
-                    id="wrapping-grid"
-                ></div>
-
-
-                <div
-                    class="chosen-pill"
-                    id="wrapping-preview"
-                >
-
-                    No wrapping chosen yet.
-
-                </div>
-
-
-            </div>
-
-
-
-            <button
-                class="main-button"
-                id="bouquet-button"
-                type="button"
-            >
-
-                Make my bouquet 💐
-
-            </button>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 08 — FINAL BOUQUET
-             ================================================= -->
-
-        <section
-            class="room final-bouquet-room"
-            id="room-8"
-        >
-
-
-            <div class="final-heading">
-
-                <div class="tiny-label">
-                    YOUR BOUQUET · 05
-                </div>
-
-
-                <h2>
-
-                    This one's
-
-                    <br>
-
-                    <em>
-                        yours.
-                    </em>
-
-                </h2>
-
-
-                <p id="final-subtitle">
-
-                    You picked every little piece yourself.
-
-                </p>
-
-            </div>
-
-
-
-            <div
-                class="bouquet-stage"
-                id="bouquet-stage"
-            >
-
-
-                <div class="bouquet-glow"></div>
-
-
-                <div
-                    class="bouquet-art"
-                    id="bouquet-art"
-                ></div>
-
-
-            </div>
-
-
-
-            <div
-                class="final-details"
-                id="final-details"
-            ></div>
-
-
-
-            <button
-                class="main-button"
-                id="gift-next-button"
-                type="button"
-            >
-
-                Take me to my gift
-
-                <span>
-                    🎁
+                <span class="step-label">
+                    THE CAKE SHOP · 04
                 </span>
 
-            </button>
+                <h2>
+                    Design your
+                    <em>dream cake.</em>
+                </h2>
 
+                <p>
+                    Don't settle for a cake you wouldn't actually
+                    want at your birthday.
+                </p>
+
+            </div>
+
+
+            <div class="cake-builder">
+
+
+                <!-- CAKE PREVIEW -->
+
+                <div class="cake-preview-card">
+
+                    <div class="preview-label">
+                        YOUR CAKE
+                    </div>
+
+
+                    <div
+                        id="cakePreview"
+                        class="cake-preview"
+                    >
+
+                        <div class="preview-cake">
+
+                            <div
+                                id="previewCakeTop"
+                                class="preview-cake-top"
+                            ></div>
+
+                            <div
+                                id="previewCakeBody"
+                                class="preview-cake-body"
+                            ></div>
+
+                            <div
+                                id="previewCakeDecor"
+                                class="preview-cake-decor"
+                            >
+                                ✿　♡　✿
+                            </div>
+
+                            <div
+                                id="previewCakeCandles"
+                                class="preview-cake-candles"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAKE OPTIONS -->
+
+                <div class="customization-card">
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Cake shape
+                        </h3>
+
+
+                        <div class="choice-grid">
+
+                            <button
+                                class="choice-button cake-shape-choice selected"
+                                data-shape="round"
+                                type="button"
+                            >
+                                🎂
+                                <span>Round</span>
+                            </button>
+
+                            <button
+                                class="choice-button cake-shape-choice"
+                                data-shape="heart"
+                                type="button"
+                            >
+                                💗
+                                <span>Heart</span>
+                            </button>
+
+                            <button
+                                class="choice-button cake-shape-choice"
+                                data-shape="tiered"
+                                type="button"
+                            >
+                                🎂
+                                <span>Two tier</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Cake flavour
+                        </h3>
+
+
+                        <div class="choice-grid">
+
+                            <button
+                                class="choice-button cake-flavour-choice selected"
+                                data-flavour="strawberry"
+                                type="button"
+                            >
+                                🍓
+                                <span>Strawberry</span>
+                            </button>
+
+                            <button
+                                class="choice-button cake-flavour-choice"
+                                data-flavour="chocolate"
+                                type="button"
+                            >
+                                🍫
+                                <span>Chocolate</span>
+                            </button>
+
+                            <button
+                                class="choice-button cake-flavour-choice"
+                                data-flavour="vanilla"
+                                type="button"
+                            >
+                                🍦
+                                <span>Vanilla</span>
+                            </button>
+
+                            <button
+                                class="choice-button cake-flavour-choice"
+                                data-flavour="redvelvet"
+                                type="button"
+                            >
+                                ❤️
+                                <span>Red velvet</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Frosting colour
+                        </h3>
+
+
+                        <div class="colour-grid">
+
+                            <button
+                                class="colour-choice selected"
+                                data-colour="#e9a8b9"
+                                style="--choice-color:#e9a8b9"
+                                aria-label="Pink"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="colour-choice"
+                                data-colour="#fff1e8"
+                                style="--choice-color:#fff1e8"
+                                aria-label="Cream"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="colour-choice"
+                                data-colour="#cbb7df"
+                                style="--choice-color:#cbb7df"
+                                aria-label="Lavender"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="colour-choice"
+                                data-colour="#f2b99f"
+                                style="--choice-color:#f2b99f"
+                                aria-label="Peach"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="colour-choice"
+                                data-colour="#b8d5c0"
+                                style="--choice-color:#b8d5c0"
+                                aria-label="Sage"
+                                type="button"
+                            ></button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Decorations
+                        </h3>
+
+
+                        <div class="choice-grid">
+
+                            <button
+                                class="choice-button decor-choice selected"
+                                data-decor="flowers"
+                                type="button"
+                            >
+                                🌸
+                                <span>Flowers</span>
+                            </button>
+
+                            <button
+                                class="choice-button decor-choice"
+                                data-decor="hearts"
+                                type="button"
+                            >
+                                💗
+                                <span>Hearts</span>
+                            </button>
+
+                            <button
+                                class="choice-button decor-choice"
+                                data-decor="pearls"
+                                type="button"
+                            >
+                                🤍
+                                <span>Pearls</span>
+                            </button>
+
+                            <button
+                                class="choice-button decor-choice"
+                                data-decor="sprinkles"
+                                type="button"
+                            >
+                                ✨
+                                <span>Sprinkles</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="custom-cake-description">
+
+                        <label for="customCake">
+                            Want something extra?
+                        </label>
+
+                        <p>
+                            Describe any special detail you'd
+                            love on your cake.
+                        </p>
+
+                        <textarea
+                            id="customCake"
+                            maxlength="250"
+                            placeholder="Example: A pink strawberry cake with tiny white flowers and gold stars..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        id="cakeNext"
+                        class="primary-button full-button"
+                        type="button"
+                    >
+
+                        Save my cake 🎂
+
+                    </button>
+
+                </div>
+
+            </div>
 
         </section>
 
 
-
         <!-- =================================================
-             ROOM 09 — GIFT
+             SCREEN 5 — GIFT SHOP
              ================================================= -->
 
         <section
-            class="room gift-room"
-            id="room-9"
+            id="screen-5"
+            class="screen customization-screen"
         >
 
+            <div class="screen-heading">
 
-            <div class="panel gift-panel">
+                <span class="step-label">
+                    THE GIFT SHOP · 05
+                </span>
+
+                <h2>
+                    Pick something
+                    <em>for yourself.</em>
+                </h2>
+
+                <p>
+                    Because yes, you get an actual present.
+                </p>
+
+            </div>
 
 
-                <div class="tiny-label">
-                    A little present
+            <div class="gift-shop">
+
+
+                <!-- GIFT BOX PREVIEW -->
+
+                <div class="gift-preview-card">
+
+                    <div class="preview-label">
+                        YOUR PRESENT
+                    </div>
+
+
+                    <div
+                        id="giftPreview"
+                        class="gift-preview"
+                    >
+
+                        <div
+                            id="giftBox"
+                            class="gift-box"
+                        >
+
+                            <div class="gift-box-body"></div>
+
+                            <div class="gift-box-lid"></div>
+
+                            <div class="gift-ribbon-vertical"></div>
+
+                            <div class="gift-ribbon-horizontal"></div>
+
+                            <div class="gift-bow">
+                                🎀
+                            </div>
+
+                            <div
+                                id="giftObject"
+                                class="gift-object"
+                            >
+                                🧸
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
 
-                <h2 id="gift-title">
+                <!-- GIFT OPTIONS -->
 
-                    Something for you.
+                <div class="customization-card">
 
+
+                    <div class="option-section">
+
+                        <h3>
+                            Choose your present
+                        </h3>
+
+
+                        <div class="gift-grid">
+
+
+                            <button
+                                class="gift-choice selected"
+                                data-gift="teddy"
+                                data-emoji="🧸"
+                                type="button"
+                            >
+
+                                <span>🧸</span>
+
+                                <strong>
+                                    Teddy bear
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="necklace"
+                                data-emoji="💎"
+                                type="button"
+                            >
+
+                                <span>💎</span>
+
+                                <strong>
+                                    Jewellery
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="book"
+                                data-emoji="📚"
+                                type="button"
+                            >
+
+                                <span>📚</span>
+
+                                <strong>
+                                    Books
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="perfume"
+                                data-emoji="🌸"
+                                type="button"
+                            >
+
+                                <span>🌸</span>
+
+                                <strong>
+                                    Perfume
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="chocolate"
+                                data-emoji="🍫"
+                                type="button"
+                            >
+
+                                <span>🍫</span>
+
+                                <strong>
+                                    Chocolates
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="headphones"
+                                data-emoji="🎧"
+                                type="button"
+                            >
+
+                                <span>🎧</span>
+
+                                <strong>
+                                    Headphones
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="bag"
+                                data-emoji="👜"
+                                type="button"
+                            >
+
+                                <span>👜</span>
+
+                                <strong>
+                                    Little bag
+                                </strong>
+
+                            </button>
+
+
+                            <button
+                                class="gift-choice"
+                                data-gift="plushie"
+                                data-emoji="🐰"
+                                type="button"
+                            >
+
+                                <span>🐰</span>
+
+                                <strong>
+                                    Plushie
+                                </strong>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Gift box colour
+                        </h3>
+
+
+                        <div class="colour-grid">
+
+                            <button
+                                class="gift-colour selected"
+                                data-gift-colour="#e59aac"
+                                style="--choice-color:#e59aac"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="gift-colour"
+                                data-gift-colour="#bca9d8"
+                                style="--choice-color:#bca9d8"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="gift-colour"
+                                data-gift-colour="#ead9bd"
+                                style="--choice-color:#ead9bd"
+                                type="button"
+                            ></button>
+
+                            <button
+                                class="gift-colour"
+                                data-gift-colour="#d87582"
+                                style="--choice-color:#d87582"
+                                type="button"
+                            ></button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="giftNext"
+                        class="primary-button full-button"
+                        type="button"
+                    >
+
+                        Wrap it for me 🎁
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCREEN 6 — FLOWER SHOP
+             ================================================= -->
+
+        <section
+            id="screen-6"
+            class="screen flower-screen"
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-label">
+                    THE FLOWER SHOP · 06
+                </span>
+
+                <h2>
+                    Make yourself a
+                    <em>bouquet.</em>
+                </h2>
+
+                <p>
+                    Pick as many flowers as your heart wants.
+                </p>
+
+            </div>
+
+
+            <div class="flower-shop">
+
+
+                <div class="flower-display">
+
+                    <div class="flower-category-title">
+                        FLOWERS
+                    </div>
+
+
+                    <div
+                        id="flowerGrid"
+                        class="flower-grid"
+                    ></div>
+
+
+                    <div class="flower-category-title">
+                        GREENERY
+                    </div>
+
+
+                    <div
+                        id="greeneryGrid"
+                        class="greenery-grid"
+                    ></div>
+
+                </div>
+
+
+                <div class="bouquet-controls">
+
+
+                    <div class="selection-summary">
+
+                        <span>
+                            Your bouquet
+                        </span>
+
+                        <strong id="flowerCount">
+                            0 flowers
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        id="flowersNext"
+                        class="primary-button"
+                        type="button"
+                    >
+
+                        Wrap my bouquet 💐
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCREEN 7 — RIBBON & WRAPPING
+             ================================================= -->
+
+        <section
+            id="screen-7"
+            class="screen customization-screen"
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-label">
+                    THE WRAPPING COUNTER · 07
+                </span>
+
+                <h2>
+                    One last little
+                    <em>detail.</em>
+                </h2>
+
+                <p>
+                    Choose how your bouquet should look.
+                </p>
+
+            </div>
+
+
+            <div class="wrapping-builder">
+
+
+                <div class="wrapping-preview">
+
+                    <div class="preview-label">
+                        YOUR BOUQUET
+                    </div>
+
+
+                    <div
+                        id="wrappingBouquetPreview"
+                        class="wrapping-bouquet-preview"
+                    >
+
+                        <div class="mini-bouquet">
+                            🌷🌸🌹
+                        </div>
+
+                        <div
+                            id="previewRibbon"
+                            class="preview-ribbon"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="customization-card">
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Pick a ribbon
+                        </h3>
+
+
+                        <div
+                            id="ribbonGrid"
+                            class="ribbon-grid"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="option-section">
+
+                        <h3>
+                            Pick the wrapping
+                        </h3>
+
+
+                        <div
+                            id="wrappingGrid"
+                            class="wrapping-choice-grid"
+                        ></div>
+
+                    </div>
+
+
+                    <button
+                        id="wrappingNext"
+                        class="primary-button full-button"
+                        type="button"
+                    >
+
+                        Finish my bouquet 💐
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SCREEN 8 — FINAL PRESENTATION
+             ================================================= -->
+
+        <section
+            id="screen-8"
+            class="screen final-screen"
+        >
+
+            <div class="final-content">
+
+
+                <div class="final-sparkles">
+                    ✦　✧　✦
+                </div>
+
+
+                <p class="eyebrow">
+                    YOUR LITTLE BIRTHDAY WORLD
+                </p>
+
+
+                <h2>
+                    Happy Birthday,
+                    <em id="finalName">you</em>.
                 </h2>
 
 
-                <p id="gift-intro">
+                <p class="final-intro">
 
-                    It isn't wrapped in paper,
-                    but we hope you keep it.
+                    Nobody gets to decide whether you deserve
+                    to be celebrated.
+
+                    <br>
+
+                    Today, you chose your own cake,
+                    your own gift and your own flowers.
 
                 </p>
 
 
+                <!-- FINAL CAKE -->
+
+                <div class="final-object">
+
+                    <span>
+                        YOUR CAKE
+                    </span>
+
+                    <div
+                        id="finalCake"
+                        class="final-cake"
+                    >
+                        🎂
+                    </div>
+
+                </div>
+
+
+                <!-- FINAL GIFT -->
+
+                <div class="final-object">
+
+                    <span>
+                        YOUR PRESENT
+                    </span>
+
+                    <div
+                        id="finalGift"
+                        class="final-gift"
+                    >
+                        🎁
+                    </div>
+
+                </div>
+
+
+                <!-- FINAL BOUQUET -->
+
+                <div class="final-object">
+
+                    <span>
+                        YOUR BOUQUET
+                    </span>
+
+                    <div
+                        id="finalBouquet"
+                        class="final-bouquet"
+                    >
+                        💐
+                    </div>
+
+                </div>
+
+
+                <div class="final-message">
+
+                    <p>
+                        May this year give you more reasons
+                        to smile than you had to ask for.
+                    </p>
+
+                    <strong>
+                        You deserved the little party. ♡
+                    </strong>
+
+                </div>
+
 
                 <button
-                    class="gift-box"
-                    id="gift-box"
+                    id="restartButton"
+                    class="secondary-button"
                     type="button"
-                    aria-label="Open gift"
                 >
 
-                    <span class="gift-lid"></span>
-
-                    <span class="gift-body"></span>
-
-                    <span class="gift-ribbon-v"></span>
-
-                    <span class="gift-ribbon-h"></span>
-
-                    <span class="gift-bow">
-                        ♡
-                    </span>
+                    Make another birthday
 
                 </button>
 
-
-
-                <div
-                    class="gift-reveal"
-                    id="gift-reveal"
-                ></div>
-
-
             </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             ROOM 10 — FINAL MESSAGE
-             ================================================= -->
-
-        <section
-            class="room final-room"
-            id="room-10"
-        >
-
-
-            <div class="final-stars">
-                ✦ · ✧ · ✦
-            </div>
-
-
-            <div
-                class="final-bouquet-mini"
-                id="final-bouquet-mini"
-            >
-
-                🌷🌸🌼
-
-            </div>
-
-
-            <div class="tiny-label">
-                your little birthday world
-            </div>
-
-
-            <h2>
-
-                Maybe today is loud.
-
-                <br>
-
-                Maybe today is quiet.
-
-            </h2>
-
-
-            <p>
-
-                Maybe you're celebrating with
-                everyone you love,
-
-                <br>
-
-                or maybe you're celebrating by yourself.
-
-            </p>
-
-
-            <p>
-
-                <strong>
-                    Either way, you deserved
-                    a little celebration.
-                </strong>
-
-            </p>
-
-
-            <p>
-                So we made you one.
-            </p>
-
-
-            <div class="final-rule"></div>
-
-
-            <h3>
-
-                Happy Birthday,
-
-                <span id="final-name">
-                    Birthday Star
-                </span>.
-
-                ♡
-
-            </h3>
-
-
-            <small>
-                We're glad you're here.
-            </small>
-
-
-            <button
-                class="restart"
-                id="restart-button"
-                type="button"
-            >
-
-                Visit your party again ↺
-
-            </button>
-
 
         </section>
 
@@ -1413,31 +1429,37 @@
     </main>
 
 
+    <!-- =====================================================
+         TOAST
+         ===================================================== -->
+
+    <div
+        id="toast"
+        class="toast"
+        aria-live="polite"
+    ></div>
+
 
     <!-- =====================================================
-         BIRTHDAY MUSIC
+         AUDIO
          ===================================================== -->
 
     <audio
-        id="birthday-audio"
+        id="birthdayAudio"
         preload="auto"
+        loop
     >
 
-        <source
-            src="assets/music/birthday-song.mp3"
-            type="audio/mpeg"
-        >
+        <!--
+            The JavaScript will use the audio element.
+            You can later replace the source with your
+            own birthday song file.
+        -->
 
     </audio>
 
 
-
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
-
     <script src="script.js"></script>
-
 
 </body>
 
