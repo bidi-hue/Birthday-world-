@@ -1,3835 +1,1883 @@
 /* =========================================================
    A LITTLE BIRTHDAY WORLD
-   PINK / DREAMY / CUTE AESTHETIC
+   MAIN JAVASCRIPT
    ========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --pink: #e7a1b5;
-    --pink-dark: #b96882;
-    --pink-soft: #f8dfe7;
-    --pink-pale: #fff3f6;
-    --cream: #fffaf3;
-
-    --rose: #d889a0;
-    --lavender: #c5addb;
-
-    --text: #674b55;
-    --muted: #9c808a;
-
-    --dark: #261c2b;
-    --dark-soft: #34243a;
-
-    --gold: #e8c47d;
-
-    --shadow:
-        rgba(101, 58, 73, 0.16);
-}
 
 
 /* =========================================================
-   RESET
+   STATE
    ========================================================= */
 
-html {
-    scroll-behavior: smooth;
-}
+const birthday = {
+    name: "",
+    age: 0,
 
-body {
-    min-height: 100vh;
+    cake: {
+        flavour: "Vanilla",
+        style: "Classic",
+        colour: "#e9a8b9",
+        custom: ""
+    },
 
-    font-family:
-        "DM Sans",
-        sans-serif;
+    gift: {
+        object: "🎁",
+        name: "A surprise gift"
+    },
 
-    color: var(--text);
+    flowers: {},
 
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            #f7dce5,
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 90% 90%,
-            #eadff1,
-            transparent 30%
-        ),
-        #fff7f3;
+    ribbon: {
+        name: "Blush Pink",
+        colour: "#d99aaa"
+    },
 
-    overflow-x: hidden;
-}
+    wrapping: {
+        name: "Blush Pink",
+        colour: "#e8b7c1"
+    }
+};
 
 
 /* =========================================================
-   DECORATIVE BACKGROUND
+   FLOWER DATA
    ========================================================= */
 
-.background-decor {
-    position: fixed;
-    inset: 0;
+const flowers = [
 
-    z-index: 0;
+    {
+        name: "Rose",
+        meaning: "Love",
+        type: "rose",
+        colour: "#d77f94"
+    },
 
-    pointer-events: none;
+    {
+        name: "Pink Rose",
+        meaning: "Sweetness",
+        type: "rose",
+        colour: "#e6a0b3"
+    },
 
-    overflow: hidden;
-}
+    {
+        name: "White Rose",
+        meaning: "Pure joy",
+        type: "rose",
+        colour: "#fff7f5"
+    },
 
-.background-decor span {
-    position: absolute;
+    {
+        name: "Sunflower",
+        meaning: "Happiness",
+        type: "sunflower",
+        colour: "#e9b936"
+    },
 
-    color:
-        rgba(194, 112, 138, 0.17);
+    {
+        name: "Tulip",
+        meaning: "Perfect love",
+        type: "tulip",
+        colour: "#d96582"
+    },
 
-    animation:
-        floatDecor
-        7s ease-in-out infinite;
-}
+    {
+        name: "Lily",
+        meaning: "Purity",
+        type: "lily",
+        colour: "#fff8ed"
+    },
 
-.bg-heart:nth-child(1) {
-    top: 17%;
-    left: 5%;
-    font-size: 30px;
-}
+    {
+        name: "Orchid",
+        meaning: "Beauty",
+        type: "orchid",
+        colour: "#ad82ca"
+    },
 
-.bg-flower:nth-child(2) {
-    top: 65%;
-    right: 6%;
-    font-size: 25px;
-    animation-delay: 2s;
-}
+    {
+        name: "Daisy",
+        meaning: "Innocence",
+        type: "daisy",
+        colour: "#fffdf3"
+    },
 
-.bg-star:nth-child(3) {
-    top: 25%;
-    right: 13%;
-    font-size: 15px;
-    animation-delay: 1s;
-}
+    {
+        name: "Peony",
+        meaning: "Prosperity",
+        type: "peony",
+        colour: "#e995ad"
+    },
 
-.bg-heart:nth-child(4) {
-    bottom: 12%;
-    left: 12%;
-    font-size: 23px;
-    animation-delay: 3s;
-}
+    {
+        name: "Lavender",
+        meaning: "Calm",
+        type: "lavender",
+        colour: "#ad91ca"
+    },
 
-.bg-flower:nth-child(5) {
-    bottom: 30%;
-    right: 10%;
-    font-size: 20px;
-    animation-delay: 4s;
-}
+    {
+        name: "Lotus",
+        meaning: "Peace",
+        type: "lotus",
+        colour: "#e7a0b2"
+    },
 
-.bg-star:nth-child(6) {
-    top: 48%;
-    left: 8%;
-    font-size: 13px;
-    animation-delay: 5s;
-}
+    {
+        name: "Iris",
+        meaning: "Hope",
+        type: "iris",
+        colour: "#8583c9"
+    },
 
-@keyframes floatDecor {
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(0deg);
+    {
+        name: "Cherry Blossom",
+        meaning: "New beginnings",
+        type: "cherry",
+        colour: "#f0a7bd"
+    },
+
+    {
+        name: "Hydrangea",
+        meaning: "Gratitude",
+        type: "hydrangea",
+        colour: "#9c9dd4"
+    },
+
+    {
+        name: "Poppy",
+        meaning: "Remembrance",
+        type: "poppy",
+        colour: "#e76b70"
+    },
+
+    {
+        name: "Magnolia",
+        meaning: "Nobility",
+        type: "magnolia",
+        colour: "#efd5dc"
+    },
+
+    {
+        name: "Zinnia",
+        meaning: "Friendship",
+        type: "zinnia",
+        colour: "#e67f97"
+    },
+
+    {
+        name: "Bluebell",
+        meaning: "Humility",
+        type: "bluebell",
+        colour: "#8c91d1"
     }
 
-    50% {
-        transform:
-            translateY(-18px)
-            rotate(12deg);
+];
+
+
+/* =========================================================
+   FLOWER SVG
+   ========================================================= */
+
+function flowerSVG(type, colour) {
+
+    const petal = (
+        cx,
+        cy,
+        rx,
+        ry,
+        rotation = 0
+    ) => {
+
+        return `
+            <ellipse
+                cx="${cx}"
+                cy="${cy}"
+                rx="${rx}"
+                ry="${ry}"
+                fill="${colour}"
+                transform="
+                    rotate(
+                        ${rotation}
+                        ${cx}
+                        ${cy}
+                    )
+                "
+            />
+        `;
+
+    };
+
+
+    let content = "";
+
+
+    /* ROSE */
+
+    if (type === "rose") {
+
+        content = `
+
+            ${petal(50,25,15,25)}
+            ${petal(70,38,22,14,55)}
+            ${petal(67,63,22,14,120)}
+            ${petal(50,75,15,25)}
+            ${petal(33,63,22,14,-120)}
+            ${petal(30,38,22,14,-55)}
+
+            <circle
+                cx="50"
+                cy="50"
+                r="18"
+                fill="${colour}"
+            />
+
+            <path
+                d="M38 48
+                   C45 36 62 39 62 50
+                   C62 61 45 64 39 53"
+                fill="none"
+                stroke="white"
+                stroke-opacity=".3"
+                stroke-width="3"
+            />
+
+        `;
+
     }
+
+
+    /* SUNFLOWER */
+
+    else if (type === "sunflower") {
+
+        for (let i = 0; i < 12; i++) {
+
+            const angle =
+                i * 30;
+
+            content += `
+                <ellipse
+                    cx="50"
+                    cy="23"
+                    rx="8"
+                    ry="24"
+                    fill="${colour}"
+                    transform="
+                        rotate(
+                            ${angle}
+                            50
+                            50
+                        )
+                    "
+                />
+            `;
+
+        }
+
+        content += `
+            <circle
+                cx="50"
+                cy="50"
+                r="18"
+                fill="#71472e"
+            />
+        `;
+
+    }
+
+
+    /* TULIP */
+
+    else if (type === "tulip") {
+
+        content = `
+
+            <path
+                d="
+                    M20 35
+                    C28 15 40 25 50 35
+                    C60 25 72 15 80 35
+                    C80 70 66 82 50 82
+                    C34 82 20 70 20 35
+                    Z
+                "
+                fill="${colour}"
+            />
+
+            <path
+                d="
+                    M20 35
+                    C30 47 40 48 50 35
+                    C60 48 70 47 80 35
+                "
+                fill="none"
+                stroke="white"
+                stroke-opacity=".28"
+                stroke-width="3"
+            />
+
+        `;
+
+    }
+
+
+    /* LILY */
+
+    else if (type === "lily") {
+
+        content = `
+
+            ${petal(50,23,13,31)}
+            ${petal(73,37,14,27,55)}
+            ${petal(67,65,14,27,120)}
+            ${petal(33,65,14,27,-120)}
+            ${petal(27,37,14,27,-55)}
+
+            <circle
+                cx="50"
+                cy="50"
+                r="8"
+                fill="#d59c56"
+            />
+
+        `;
+
+    }
+
+
+    /* ORCHID */
+
+    else if (type === "orchid") {
+
+        content = `
+
+            ${petal(50,27,13,23)}
+            ${petal(72,39,20,12,60)}
+            ${petal(67,66,19,12,120)}
+            ${petal(33,66,19,12,-120)}
+            ${petal(28,39,20,12,-60)}
+
+            <circle
+                cx="50"
+                cy="52"
+                r="11"
+                fill="#f4c6d3"
+            />
+
+            <circle
+                cx="50"
+                cy="52"
+                r="4"
+                fill="#c47a96"
+            />
+
+        `;
+
+    }
+
+
+    /* DAISY */
+
+    else if (type === "daisy") {
+
+        for (let i = 0; i < 12; i++) {
+
+            const angle =
+                i * 30;
+
+            content += `
+                <ellipse
+                    cx="50"
+                    cy="24"
+                    rx="8"
+                    ry="25"
+                    fill="${colour}"
+                    transform="
+                        rotate(
+                            ${angle}
+                            50
+                            50
+                        )
+                    "
+                />
+            `;
+
+        }
+
+        content += `
+            <circle
+                cx="50"
+                cy="50"
+                r="10"
+                fill="#d39a4e"
+            />
+        `;
+
+    }
+
+
+    /* PEONY */
+
+    else if (type === "peony") {
+
+        content = `
+
+            ${petal(50,27,18,22)}
+            ${petal(70,38,21,17,50)}
+            ${petal(68,62,21,17,110)}
+            ${petal(50,73,18,22)}
+            ${petal(32,62,21,17,-110)}
+            ${petal(30,38,21,17,-50)}
+
+            <circle
+                cx="50"
+                cy="50"
+                r="20"
+                fill="${colour}"
+            />
+
+            <circle
+                cx="43"
+                cy="46"
+                r="7"
+                fill="white"
+                fill-opacity=".2"
+            />
+
+        `;
+
+    }
+
+
+    /* LOTUS */
+
+    else if (type === "lotus") {
+
+        content = `
+
+            <path
+                d="
+                    M50 76
+                    C25 67 23 48 30 34
+                    C40 42 48 52 50 76
+                "
+                fill="${colour}"
+            />
+
+            <path
+                d="
+                    M50 76
+                    C75 67 77 48 70 34
+                    C60 42 52 52 50 76
+                "
+                fill="${colour}"
+            />
+
+            <path
+                d="
+                    M50 76
+                    C38 62 38 37 50 22
+                    C62 37 62 62 50 76
+                "
+                fill="${colour}"
+            />
+
+        `;
+
+    }
+
+
+    /* IRIS */
+
+    else if (type === "iris") {
+
+        content = `
+
+            ${petal(50,26,15,28)}
+            ${petal(72,40,20,13,55)}
+            ${petal(64,66,22,12,120)}
+            ${petal(36,66,22,12,-120)}
+            ${petal(28,40,20,13,-55)}
+
+            <circle
+                cx="50"
+                cy="52"
+                r="8"
+                fill="#efc46b"
+            />
+
+        `;
+
+    }
+
+
+    /* CHERRY BLOSSOM */
+
+    else if (type === "cherry") {
+
+        for (let i = 0; i < 5; i++) {
+
+            const angle =
+                i * 72;
+
+            const x =
+                50 +
+                Math.cos(
+                    angle * Math.PI / 180
+                ) * 22;
+
+            const y =
+                50 +
+                Math.sin(
+                    angle * Math.PI / 180
+                ) * 22;
+
+            content += `
+                <circle
+                    cx="${x}"
+                    cy="${y}"
+                    r="16"
+                    fill="${colour}"
+                />
+            `;
+
+        }
+
+        content += `
+            <circle
+                cx="50"
+                cy="50"
+                r="8"
+                fill="#d49b48"
+            />
+        `;
+
+    }
+
+
+    /* HYDRANGEA */
+
+    else if (type === "hydrangea") {
+
+        for (let i = 0; i < 9; i++) {
+
+            const angle =
+                i * 40;
+
+            const x =
+                50 +
+                Math.cos(
+                    angle * Math.PI / 180
+                ) * 25;
+
+            const y =
+                50 +
+                Math.sin(
+                    angle * Math.PI / 180
+                ) * 25;
+
+            content += `
+                <circle
+                    cx="${x}"
+                    cy="${y}"
+                    r="14"
+                    fill="${colour}"
+                />
+
+                <circle
+                    cx="${x}"
+                    cy="${y}"
+                    r="4"
+                    fill="#f5d9df"
+                />
+            `;
+
+        }
+
+    }
+
+
+    /* SIMPLE FLOWERS */
+
+    else {
+
+        for (let i = 0; i < 8; i++) {
+
+            const angle =
+                i * 45;
+
+            content += `
+                <ellipse
+                    cx="50"
+                    cy="25"
+                    rx="11"
+                    ry="22"
+                    fill="${colour}"
+                    transform="
+                        rotate(
+                            ${angle}
+                            50
+                            50
+                        )
+                    "
+                />
+            `;
+
+        }
+
+        content += `
+            <circle
+                cx="50"
+                cy="50"
+                r="9"
+                fill="#d49b48"
+            />
+        `;
+
+    }
+
+
+    return `
+        <svg
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+        >
+            ${content}
+        </svg>
+    `;
+
 }
 
 
 /* =========================================================
-   TOP BAR
+   SCREEN NAVIGATION
    ========================================================= */
 
-.topbar {
-    position: fixed;
+const screens =
+    document.querySelectorAll(".screen");
 
-    top: 0;
-    left: 50%;
+const progressFill =
+    document.getElementById("progress-fill");
 
-    transform:
-        translateX(-50%);
+let currentScreen =
+    0;
 
-    z-index: 100;
 
-    width:
-        min(100%, 820px);
+function showScreen(number) {
 
-    height: 70px;
+    screens.forEach(
+        screen =>
+            screen.classList.remove("active")
+    );
 
-    display:
-        flex;
 
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    padding:
-        10px 17px;
-
-    background:
-        rgba(255, 248, 247, 0.93);
-
-    backdrop-filter:
-        blur(16px);
-
-    border-bottom:
-        1px solid
-        rgba(178, 119, 135, 0.15);
-
-    box-shadow:
-        0 5px 25px
-        rgba(111, 68, 79, 0.06);
-}
-
-
-.brand {
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap: 10px;
-}
-
-
-.brand-icon {
-    width: 42px;
-    height: 42px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        50%;
-
-    background:
-        #f4d2dc;
-
-    font-size: 22px;
-
-    box-shadow:
-        0 6px 18px
-        rgba(175, 98, 122, 0.12);
-}
-
-
-.brand strong {
-    display:
-        block;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 22px;
-
-    line-height: 0.9;
-
-    color:
-        #6b4b54;
-}
-
-
-.brand small {
-    display:
-        block;
-
-    margin-top: 4px;
-
-    color:
-        #a8848d;
-
-    font-size: 7px;
-
-    letter-spacing: 1.3px;
-
-    text-transform:
-        uppercase;
-}
-
-
-.music-button {
-    width: 42px;
-    height: 38px;
-
-    border:
-        1px solid
-        #e4cbd1;
-
-    border-radius:
-        22px;
-
-    background:
-        #fff9f7;
-
-    color:
-        #a65f76;
-
-    font-size: 17px;
-
-    cursor:
-        pointer;
-
-    transition:
-        0.2s ease;
-}
-
-
-.music-button:hover {
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 7px 18px
-        rgba(140, 76, 94, 0.12);
-}
-
-
-/* =========================================================
-   PROGRESS
-   ========================================================= */
-
-.progress-bar {
-    position: fixed;
-
-    top: 70px;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 101;
-
-    width:
-        min(100%, 820px);
-
-    height: 4px;
-
-    background:
-        #f0dfe3;
-}
-
-
-.progress-fill {
-    width: 0%;
-
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #d6819a,
-            #e7aabd,
-            #c5addb
+    const target =
+        document.getElementById(
+            `screen-${number}`
         );
 
-    transition:
-        width 0.55s ease;
-}
+
+    if (!target) return;
 
 
-/* =========================================================
-   APP
-   ========================================================= */
-
-#app {
-    position: relative;
-
-    z-index: 2;
-
-    width:
-        min(100%, 820px);
-
-    min-height:
-        100vh;
-
-    margin:
-        0 auto;
-
-    padding-top:
-        74px;
-
-    overflow:
-        hidden;
-}
+    target.classList.add("active");
 
 
-/* =========================================================
-   SCREENS
-   ========================================================= */
-
-.screen {
-    display: none;
-
-    width: 100%;
-
-    min-height:
-        calc(100vh - 74px);
-
-    padding:
-        35px 16px 50px;
-
-    animation:
-        screenIn
-        0.55s ease both;
-}
+    currentScreen =
+        number;
 
 
-.screen.active {
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-}
+    const progress =
+        (number /
+        (screens.length - 1)) * 100;
 
 
-@keyframes screenIn {
-    from {
-        opacity: 0;
+    if (progressFill) {
 
-        transform:
-            translateX(45px);
+        progressFill.style.width =
+            `${progress}%`;
+
     }
 
-    to {
-        opacity: 1;
 
-        transform:
-            translateX(0);
-    }
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
 }
 
 
 /* =========================================================
-   BUTTONS
+   ELEMENT HELPER
    ========================================================= */
 
-.primary-button {
-    position: relative;
-    z-index: 20;
+function $(id) {
 
-    min-height: 51px;
+    return document.getElementById(id);
 
-    padding:
-        12px 23px;
+}
 
-    border:
-        none;
 
-    border-radius:
-        28px;
+/* =========================================================
+   WELCOME → DETAILS
+   ========================================================= */
 
-    background:
-        linear-gradient(
-            135deg,
-            #b96783,
-            #d48ba2
+$("start-button")?.addEventListener(
+    "click",
+    () => {
+
+        showScreen(1);
+
+    }
+);
+
+
+/* =========================================================
+   DETAILS FORM
+   ========================================================= */
+
+$("details-form")?.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        const name =
+            $("person-name")?.value.trim();
+
+        const age =
+            parseInt(
+                $("person-age")?.value,
+                10
+            );
+
+
+        if (!name) {
+
+            showToast(
+                "Tell me their name first 💗"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !age ||
+            age < 1 ||
+            age > 120
+        ) {
+
+            showToast(
+                "Give me a proper birthday age 🎂"
+            );
+
+            return;
+
+        }
+
+
+        birthday.name =
+            name;
+
+        birthday.age =
+            age;
+
+
+        updateNameEverywhere();
+
+        createNumberCandles();
+
+        showScreen(2);
+
+    }
+);
+
+
+/* =========================================================
+   UPDATE NAME
+   ========================================================= */
+
+function updateNameEverywhere() {
+
+    document
+        .querySelectorAll("[data-name]")
+        .forEach(
+            element => {
+
+                element.textContent =
+                    birthday.name;
+
+            }
         );
 
-    color:
-        white;
-
-    font-family:
-        "DM Sans",
-        sans-serif;
-
-    font-size:
-        11px;
-
-    font-weight:
-        700;
-
-    cursor:
-        pointer;
-
-    box-shadow:
-        0 10px 25px
-        rgba(137, 67, 90, 0.22);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.primary-button span {
-    margin-left: 7px;
-}
-
-
-.primary-button:hover {
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 15px 30px
-        rgba(137, 67, 90, 0.3);
-}
-
-
-.primary-button:active {
-    transform:
-        scale(0.97);
-}
-
-
-.large-button {
-    min-height: 57px;
-
-    padding:
-        14px 29px;
-
-    font-size: 12px;
-}
-
-
-.full-button {
-    width: 100%;
 }
 
 
 /* =========================================================
-   WELCOME
+   CANDLES
    ========================================================= */
 
-.welcome-screen {
-    position: relative;
+function createNumberCandles() {
 
-    justify-content:
-        center;
+    const container =
+        $("number-candles");
 
-    text-align:
-        center;
+    if (!container) return;
 
-    overflow:
-        hidden;
 
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(246, 194, 208, 0.3),
-            transparent 34%
-        );
+    container.innerHTML = "";
+
+
+    const digits =
+        String(birthday.age)
+            .split("");
+
+
+    digits.forEach(
+        digit => {
+
+            const candle =
+                document.createElement("div");
+
+            candle.className =
+                "number-candle";
+
+            candle.textContent =
+                digit;
+
+            container.appendChild(
+                candle
+            );
+
+        }
+    );
+
 }
 
 
-.welcome-decoration {
-    margin-bottom: 14px;
+/* =========================================================
+   DARK ROOM
+   ========================================================= */
 
-    color:
-        #c98299;
+$("turn-lights-on")?.addEventListener(
+    "click",
+    () => {
 
-    letter-spacing:
-        7px;
+        showScreen(3);
 
-    font-size:
-        16px;
-}
+        startBirthdaySong();
 
+        launchConfetti();
 
-.welcome-bow {
-    width: 94px;
-    height: 94px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    margin:
-        0 auto 18px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(249, 222, 230, 0.9);
-
-    font-size:
-        48px;
-
-    box-shadow:
-        0 15px 40px
-        rgba(151, 84, 103, 0.14);
-
-    animation:
-        bowFloat
-        4s ease-in-out infinite;
-}
-
-
-@keyframes bowFloat {
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-3deg);
     }
+);
 
-    50% {
-        transform:
-            translateY(-9px)
-            rotate(3deg);
+
+/* =========================================================
+   PARTY → CAKE
+   ========================================================= */
+
+$("cake-customize-button")?.addEventListener(
+    "click",
+    () => {
+
+        showScreen(4);
+
+        updateCakePreview();
+
     }
-}
-
-
-.eyebrow {
-    margin-bottom: 9px;
-
-    color:
-        #ad7485;
-
-    font-size:
-        9px;
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        2px;
-
-    text-transform:
-        uppercase;
-}
-
-
-.welcome-screen h1 {
-    max-width:
-        680px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(48px, 11vw, 75px);
-
-    line-height:
-        0.9;
-
-    font-weight:
-        600;
-
-    color:
-        #684952;
-}
-
-
-.welcome-screen h1 em {
-    display:
-        block;
-
-    color:
-        #c27891;
-
-    font-style:
-        italic;
-}
-
-
-.welcome-text {
-    max-width:
-        500px;
-
-    margin:
-        20px auto 25px;
-
-    color:
-        #927a82;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.7;
-}
-
-
-.tiny-note {
-    margin-top:
-        15px;
-
-    color:
-        #b1949b;
-
-    font-size:
-        8px;
-
-    letter-spacing:
-        0.5px;
-}
+);
 
 
 /* =========================================================
-   HEADINGS
+   CAKE FLAVOUR
    ========================================================= */
 
-.screen-heading {
-    width:
-        100%;
+document
+    .querySelectorAll("[data-cake-flavour]")
+    .forEach(button => {
 
-    max-width:
-        650px;
+        button.addEventListener(
+            "click",
+            () => {
 
-    margin:
-        5px auto 24px;
+                document
+                    .querySelectorAll(
+                        "[data-cake-flavour]"
+                    )
+                    .forEach(
+                        b =>
+                            b.classList.remove(
+                                "selected"
+                            )
+                    );
 
-    text-align:
-        center;
-}
 
+                button.classList.add(
+                    "selected"
+                );
 
-.step-label {
-    display:
-        inline-block;
 
-    margin-bottom:
-        8px;
+                birthday.cake.flavour =
+                    button.dataset.cakeFlavour;
 
-    color:
-        #b06d80;
 
-    font-size:
-        9px;
+                updateCakePreview();
 
-    font-weight:
-        700;
-
-    letter-spacing:
-        2px;
-}
-
-
-.screen-heading h2 {
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(43px, 10vw, 65px);
-
-    line-height:
-        0.9;
-
-    color:
-        #684952;
-}
-
-
-.screen-heading h2 em {
-    color:
-        #c27891;
-
-    font-style:
-        italic;
-}
-
-
-.screen-heading p {
-    max-width:
-        500px;
-
-    margin:
-        12px auto 0;
-
-    color:
-        #9a8189;
-
-    font-size:
-        11px;
-
-    line-height:
-        1.6;
-}
-
-
-/* =========================================================
-   GENERAL CARD
-   ========================================================= */
-
-.card {
-    width:
-        min(100%, 590px);
-
-    padding:
-        28px 20px;
-
-    border:
-        1px solid
-        #edd9de;
-
-    border-radius:
-        28px;
-
-    background:
-        rgba(255, 251, 249, 0.92);
-
-    box-shadow:
-        0 22px 50px
-        var(--shadow);
-}
-
-
-/* =========================================================
-   FORM
-   ========================================================= */
-
-.form-screen {
-    justify-content:
-        center;
-}
-
-
-.form-card {
-    text-align:
-        left;
-}
-
-
-.input-group {
-    margin-bottom:
-        17px;
-}
-
-
-.input-group label {
-    display:
-        block;
-
-    margin-bottom:
-        7px;
-
-    color:
-        #765760;
-
-    font-size:
-        10px;
-
-    font-weight:
-        700;
-}
-
-
-.input-group input,
-.input-group select {
-    width:
-        100%;
-
-    height:
-        48px;
-
-    padding:
-        0 13px;
-
-    border:
-        1px solid
-        #e6d0d6;
-
-    border-radius:
-        13px;
-
-    outline:
-        none;
-
-    background:
-        #fff9f7;
-
-    color:
-        #634951;
-
-    font-family:
-        "DM Sans",
-        sans-serif;
-
-    font-size:
-        11px;
-}
-
-
-.input-group input:focus,
-.input-group select:focus {
-    border-color:
-        #ce899c;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(206,137,156,0.1);
-}
-
-
-.input-group select option {
-    color:
-        #634951;
-
-    background:
-        white;
-}
-
-
-.form-error {
-    min-height:
-        16px;
-
-    margin-top:
-        10px;
-
-    text-align:
-        center;
-
-    color:
-        #b34f67;
-
-    font-size:
-        9px;
-}
-
-
-/* =========================================================
-   DARKNESS SCREEN
-   ========================================================= */
-
-.darkness-screen {
-    padding:
-        0;
-
-    background:
-        #08070d;
-
-    color:
-        white;
-}
-
-
-.dark-room {
-    position:
-        relative;
-
-    width:
-        100%;
-
-    min-height:
-        calc(100vh - 74px);
-
-    overflow:
-        hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(80, 60, 96, 0.08),
-            transparent 45%
-        );
-}
-
-
-.dark-window {
-    position:
-        absolute;
-
-    top:
-        9%;
-
-    right:
-        9%;
-
-    width:
-        100px;
-
-    height:
-        125px;
-
-    border:
-        6px solid
-        #292333;
-
-    background:
-        #0c0b17;
-
-    box-shadow:
-        inset 0 0 30px
-        rgba(110,91,151,0.15);
-}
-
-
-.dark-window .window-moon {
-    position:
-        absolute;
-
-    top:
-        25px;
-
-    left:
-        28px;
-
-    width:
-        29px;
-
-    height:
-        29px;
-
-    border-radius:
-        50%;
-
-    background:
-        #e6dcbf;
-}
-
-
-.dark-window span {
-    position:
-        absolute;
-
-    color:
-        #d8cde2;
-
-    font-size:
-        9px;
-}
-
-
-.dark-window span:nth-child(2) {
-    top:
-        13px;
-
-    right:
-        12px;
-}
-
-
-.dark-window span:nth-child(3) {
-    bottom:
-        27px;
-
-    left:
-        13px;
-}
-
-
-.dark-window span:nth-child(4) {
-    top:
-        63px;
-
-    right:
-        20px;
-}
-
-
-.dark-message {
-    position:
-        absolute;
-
-    top:
-        47%;
-
-    left:
-        50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width:
-        min(90%, 520px);
-
-    text-align:
-        center;
-}
-
-
-.dark-spark {
-    margin-bottom:
-        12px;
-
-    color:
-        #e7c681;
-
-    font-size:
-        27px;
-
-    animation:
-        sparkle
-        2s ease-in-out infinite;
-}
-
-
-@keyframes sparkle {
-    0%,
-    100% {
-        opacity:
-            0.5;
-
-        transform:
-            scale(0.9);
-    }
-
-    50% {
-        opacity:
-            1;
-
-        transform:
-            scale(1.15);
-    }
-}
-
-
-.dark-message p {
-    color:
-        #8e8395;
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        2px;
-
-    text-transform:
-        uppercase;
-}
-
-
-.dark-message h2 {
-    margin:
-        8px 0 12px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(42px, 10vw, 65px);
-
-    line-height:
-        0.9;
-
-    font-weight:
-        600;
-}
-
-
-.dark-message h2 em {
-    color:
-        #d4a9c4;
-
-    font-style:
-        italic;
-}
-
-
-.dark-message > span {
-    display:
-        block;
-
-    color:
-        #746b78;
-
-    font-size:
-        11px;
-}
-
-
-.light-button {
-    margin-top:
-        25px;
-
-    border:
-        1px solid
-        rgba(238,213,164,0.25);
-
-    border-radius:
-        28px;
-
-    padding:
-        13px 23px;
-
-    background:
-        rgba(241,210,153,0.08);
-
-    color:
-        #e7c98d;
-
-    font-family:
-        "DM Sans",
-        sans-serif;
-
-    font-size:
-        10px;
-
-    cursor:
-        pointer;
-
-    transition:
-        0.25s ease;
-}
-
-
-.light-button:hover {
-    background:
-        rgba(241,210,153,0.15);
-
-    box-shadow:
-        0 0 30px
-        rgba(241,210,153,0.12);
-}
-
-
-/* =========================================================
-   PARTY
-   ========================================================= */
-
-.party-screen {
-    padding:
-        0;
-
-    background:
-        #241b29;
-
-    overflow:
-        hidden;
-}
-
-
-.party-scene {
-    position:
-        relative;
-
-    width:
-        100%;
-
-    min-height:
-        calc(100vh - 74px);
-
-    overflow:
-        hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            rgba(239,190,141,0.22),
-            transparent 40%
-        ),
-        #322433;
-
-    animation:
-        partyAppear
-        1.2s ease both;
-}
-
-
-@keyframes partyAppear {
-    from {
-        opacity:
-            0;
-    }
-
-    to {
-        opacity:
-            1;
-    }
-}
-
-
-/* =========================================================
-   PARTY BANNER
-   ========================================================= */
-
-.party-banner {
-    position:
-        absolute;
-
-    top:
-        10%;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index:
-        12;
-
-    padding:
-        10px 20px;
-
-    text-align:
-        center;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.12);
-
-    border-radius:
-        5px;
-
-    background:
-        rgba(65,43,56,0.75);
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,0.12);
-}
-
-
-.party-banner span {
-    display:
-        block;
-
-    color:
-        #edc6d1;
-
-    font-size:
-        8px;
-
-    letter-spacing:
-        3px;
-}
-
-
-.party-banner strong {
-    display:
-        block;
-
-    margin-top:
-        2px;
-
-    color:
-        #ffe4a9;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        23px;
-}
-
-
-/* =========================================================
-   BALLOONS
-   ========================================================= */
-
-.balloon {
-    position:
-        absolute;
-
-    z-index:
-        4;
-
-    font-size:
-        45px;
-
-    filter:
-        drop-shadow(
-            0 8px 8px
-            rgba(0,0,0,0.14)
+            }
         );
 
-    animation:
-        balloonFloat
-        4s ease-in-out infinite;
-}
-
-
-.balloon-1 {
-    top:
-        18%;
-
-    left:
-        7%;
-}
-
-
-.balloon-2 {
-    top:
-        23%;
-
-    right:
-        8%;
-
-    animation-delay:
-        0.8s;
-}
-
-
-.balloon-3 {
-    top:
-        39%;
-
-    left:
-        3%;
-
-    animation-delay:
-        1.5s;
-}
-
-
-.balloon-4 {
-    top:
-        42%;
-
-    right:
-        4%;
-
-    animation-delay:
-        2s;
-}
-
-
-@keyframes balloonFloat {
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-10px);
-    }
-}
+    });
 
 
 /* =========================================================
-   CHARACTERS
+   CAKE STYLE
    ========================================================= */
 
-.party-character {
-    position:
-        absolute;
+document
+    .querySelectorAll("[data-cake-style]")
+    .forEach(button => {
 
-    z-index:
-        8;
+        button.addEventListener(
+            "click",
+            () => {
 
-    bottom:
-        25%;
+                document
+                    .querySelectorAll(
+                        "[data-cake-style]"
+                    )
+                    .forEach(
+                        b =>
+                            b.classList.remove(
+                                "selected"
+                            )
+                    );
 
-    width:
-        62px;
 
-    text-align:
-        center;
+                button.classList.add(
+                    "selected"
+                );
 
-    animation:
-        characterBounce
-        3s ease-in-out infinite;
-}
 
+                birthday.cake.style =
+                    button.dataset.cakeStyle;
 
-.character-left {
-    left:
-        7%;
-}
 
+                updateCakePreview();
 
-.character-right {
-    right:
-        7%;
-
-    animation-delay:
-        1s;
-}
-
-
-.character-center {
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    animation-delay:
-        0.5s;
-}
-
-
-@keyframes characterBounce {
-    0%,
-    100% {
-        margin-bottom:
-            0;
-    }
-
-    50% {
-        margin-bottom:
-            7px;
-    }
-}
-
-
-.character-head {
-    width:
-        47px;
-
-    height:
-        47px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    margin:
-        0 auto -2px;
-
-    border-radius:
-        50%;
-
-    background:
-        #f3c8b2;
-
-    color:
-        #a45e75;
-
-    font-size:
-        15px;
-
-    box-shadow:
-        0 5px 12px
-        rgba(0,0,0,0.18);
-}
-
-
-.character-body {
-    width:
-        58px;
-
-    height:
-        62px;
-
-    margin:
-        auto;
-
-    border-radius:
-        27px 27px 11px 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d3869e,
-            #9e759d
-        );
-}
-
-
-/* =========================================================
-   CAKE TABLE
-   ========================================================= */
-
-.cake-table {
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    bottom:
-        11%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        min(75%, 460px);
-
-    height:
-        175px;
-
-    z-index:
-        10;
-}
-
-
-.table-cloth {
-    position:
-        absolute;
-
-    left:
-        0;
-
-    bottom:
-        0;
-
-    width:
-        100%;
-
-    height:
-        78px;
-
-    border-radius:
-        12px 12px 35px 35px;
-
-    background:
-        #74515e;
-
-    box-shadow:
-        0 -4px 0
-        rgba(255,255,255,0.06);
-}
-
-
-.cake-wrapper {
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    bottom:
-        43px;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        220px;
-
-    height:
-        135px;
-}
-
-
-.cake-plate {
-    position:
-        absolute;
-
-    bottom:
-        0;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        215px;
-
-    height:
-        13px;
-
-    border-radius:
-        50%;
-
-    background:
-        #eee0e0;
-}
-
-
-.cake {
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    bottom:
-        9px;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        185px;
-
-    height:
-        115px;
-}
-
-
-.cake-bottom {
-    position:
-        absolute;
-
-    bottom:
-        0;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        170px;
-
-    height:
-        47px;
-
-    border-radius:
-        10px;
-
-    background:
-        #b86d62;
-}
-
-
-.cake-middle {
-    position:
-        absolute;
-
-    bottom:
-        37px;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        155px;
-
-    height:
-        43px;
-
-    border-radius:
-        10px;
-
-    background:
-        #d58a86;
-}
-
-
-.cake-top {
-    position:
-        absolute;
-
-    bottom:
-        70px;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        140px;
-
-    height:
-        35px;
-
-    border-radius:
-        50%;
-
-    background:
-        #f0b3b3;
-}
-
-
-.cake-top::after {
-    content:
-        "";
-
-    position:
-        absolute;
-
-    left:
-        20px;
-
-    top:
-        12px;
-
-    width:
-        10px;
-
-    height:
-        10px;
-
-    border-radius:
-        50%;
-
-    background:
-        #fff3ed;
-
-    box-shadow:
-        28px 2px 0 #fff3ed,
-        56px -1px 0 #fff3ed,
-        84px 2px 0 #fff3ed;
-}
-
-
-/* =========================================================
-   NUMBER CANDLES
-   ========================================================= */
-
-.number-candles {
-    position:
-        absolute;
-
-    z-index:
-        20;
-
-    left:
-        50%;
-
-    bottom:
-        91px;
-
-    transform:
-        translateX(-50%);
-
-    display:
-        flex;
-
-    align-items:
-        flex-end;
-
-    justify-content:
-        center;
-
-    gap:
-        7px;
-}
-
-
-.number-candle {
-    position:
-        relative;
-
-    min-width:
-        25px;
-
-    height:
-        39px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border:
-        2px solid
-        rgba(255,255,255,0.8);
-
-    border-radius:
-        5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e6a4b8,
-            #c87591
+            }
         );
 
-    color:
-        #fff6e9;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        24px;
-
-    font-weight:
-        700;
-
-    box-shadow:
-        0 3px 10px
-        rgba(0,0,0,0.16);
-}
-
-
-.number-candle::before {
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        -15px;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        8px;
-
-    height:
-        13px;
-
-    border-radius:
-        50% 50% 45% 45%;
-
-    background:
-        #ffd681;
-
-    box-shadow:
-        0 0 13px
-        #ffd681;
-
-    animation:
-        flame
-        0.7s ease-in-out infinite alternate;
-}
-
-
-@keyframes flame {
-    from {
-        transform:
-            translateX(-50%)
-            scaleY(0.85);
-    }
-
-    to {
-        transform:
-            translateX(-50%)
-            scaleY(1.1);
-    }
-}
+    });
 
 
 /* =========================================================
-   PARTY MESSAGE
+   CAKE COLOUR
    ========================================================= */
 
-.party-message {
-    position:
-        absolute;
+document
+    .querySelectorAll("[data-cake-colour]")
+    .forEach(button => {
 
-    z-index:
-        15;
+        button.addEventListener(
+            "click",
+            () => {
 
-    top:
-        57%;
-
-    left:
-        50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width:
-        90%;
-
-    text-align:
-        center;
-
-    pointer-events:
-        none;
-
-    opacity:
-        0;
-
-    animation:
-        partyMessageIn
-        1s
-        0.9s
-        ease
-        forwards;
-}
+                document
+                    .querySelectorAll(
+                        "[data-cake-colour]"
+                    )
+                    .forEach(
+                        b =>
+                            b.classList.remove(
+                                "selected"
+                            )
+                    );
 
 
-@keyframes partyMessageIn {
-    from {
-        opacity:
-            0;
-
-        transform:
-            translate(-50%, -45%);
-    }
-
-    to {
-        opacity:
-            1;
-
-        transform:
-            translate(-50%, -50%);
-    }
-}
+                button.classList.add(
+                    "selected"
+                );
 
 
-.party-message p {
-    color:
-        #e5b5c3;
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        2px;
-
-    text-transform:
-        uppercase;
-}
+                birthday.cake.colour =
+                    button.dataset.cakeColour;
 
 
-.party-message h2 {
-    margin-top:
-        5px;
+                updateCakePreview();
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(40px, 9vw, 58px);
-
-    line-height:
-        0.9;
-
-    color:
-        #fff0ed;
-}
-
-
-.party-message h2 em {
-    color:
-        #e4bbd0;
-
-    font-style:
-        italic;
-}
-
-
-.party-continue {
-    position:
-        absolute;
-
-    z-index:
-        30;
-
-    left:
-        50%;
-
-    bottom:
-        5%;
-
-    transform:
-        translateX(-50%);
-
-    opacity:
-        0;
-
-    animation:
-        continueIn
-        0.7s
-        2s
-        ease
-        forwards;
-}
-
-
-@keyframes continueIn {
-    from {
-        opacity:
-            0;
-
-        transform:
-            translateX(-50%)
-            translateY(10px);
-    }
-
-    to {
-        opacity:
-            1;
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-}
-
-
-/* =========================================================
-   CAKE BUILDER
-   ========================================================= */
-
-.customization-screen {
-    padding-bottom:
-        55px;
-}
-
-
-.cake-builder,
-.gift-shop,
-.wrapping-builder {
-    width:
-        min(100%, 680px);
-}
-
-
-.cake-preview-card,
-.gift-preview-card,
-.wrapping-preview {
-    width:
-        100%;
-
-    margin-bottom:
-        15px;
-
-    padding:
-        20px;
-
-    border:
-        1px solid
-        #ecd6dc;
-
-    border-radius:
-        27px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff6f3,
-            #f9e7eb
+            }
         );
 
-    box-shadow:
-        0 18px 40px
-        rgba(111,64,79,0.1);
+    });
 
-    text-align:
-        center;
+
+/* =========================================================
+   CUSTOM CAKE DESCRIPTION
+   ========================================================= */
+
+$("custom-cake")?.addEventListener(
+    "input",
+    event => {
+
+        birthday.cake.custom =
+            event.target.value;
+
+    }
+);
+
+
+/* =========================================================
+   CAKE PREVIEW
+   ========================================================= */
+
+function updateCakePreview() {
+
+    const cake =
+        $("preview-cake");
+
+    if (!cake) return;
+
+
+    cake.style.setProperty(
+        "--cake-colour",
+        birthday.cake.colour
+    );
+
+
+    cake.style.background =
+        birthday.cake.colour;
+
+
+    const flavour =
+        $("preview-flavour");
+
+    if (flavour) {
+
+        flavour.textContent =
+            birthday.cake.flavour;
+
+    }
+
+
+    const custom =
+        $("preview-custom");
+
+    if (custom) {
+
+        custom.textContent =
+            birthday.cake.custom ||
+            birthday.cake.style;
+
+    }
+
+
+    const candles =
+        $("preview-candles");
+
+    if (candles) {
+
+        candles.innerHTML = "";
+
+        String(birthday.age)
+            .split("")
+            .forEach(
+                digit => {
+
+                    const candle =
+                        document.createElement(
+                            "span"
+                        );
+
+                    candle.className =
+                        "preview-number-candle";
+
+                    candle.textContent =
+                        digit;
+
+                    candles.appendChild(
+                        candle
+                    );
+
+                }
+            );
+
+    }
+
 }
 
 
-.preview-label {
-    margin-bottom:
-        10px;
+/* =========================================================
+   CAKE → GIFT
+   ========================================================= */
 
-    color:
-        #ae7182;
+$("cake-done")?.addEventListener(
+    "click",
+    () => {
 
-    font-size:
-        8px;
+        showScreen(5);
 
-    font-weight:
-        700;
+        updateGiftPreview();
 
-    letter-spacing:
-        2px;
-}
+    }
+);
 
 
-.cake-preview {
-    height:
-        230px;
+/* =========================================================
+   GIFT OBJECTS
+   ========================================================= */
 
-    display:
-        flex;
+document
+    .querySelectorAll("[data-gift]")
+    .forEach(button => {
 
-    align-items:
-        flex-end;
+        button.addEventListener(
+            "click",
+            () => {
 
-    justify-content:
-        center;
+                document
+                    .querySelectorAll(
+                        "[data-gift]"
+                    )
+                    .forEach(
+                        b =>
+                            b.classList.remove(
+                                "selected"
+                            )
+                    );
 
-    overflow:
-        hidden;
 
-    border-radius:
-        20px;
+                button.classList.add(
+                    "selected"
+                );
 
-    background:
-        radial-gradient(
-            circle at 50% 70%,
-            rgba(255,255,255,0.9),
-            transparent 55%
+
+                birthday.gift.object =
+                    button.dataset.gift;
+
+                birthday.gift.name =
+                    button.dataset.giftName ||
+                    "A little surprise";
+
+
+                updateGiftPreview();
+
+            }
         );
-}
+
+    });
 
 
-.preview-cake {
-    position:
-        relative;
+/* =========================================================
+   GIFT PREVIEW
+   ========================================================= */
 
-    width:
-        240px;
+function updateGiftPreview() {
 
-    height:
-        185px;
-}
+    const object =
+        $("gift-object");
 
+    if (object) {
 
-.preview-cake-body {
-    position:
-        absolute;
+        object.textContent =
+            birthday.gift.object;
 
-    left:
-        50%;
-
-    bottom:
-        20px;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        190px;
-
-    height:
-        75px;
-
-    border-radius:
-        15px;
-
-    background:
-        #e9a8b9;
-
-    box-shadow:
-        inset 0 -9px
-        rgba(100,55,62,0.08);
-}
+    }
 
 
-.preview-cake-top {
-    position:
-        absolute;
+    const label =
+        $("gift-object-name");
 
-    z-index:
-        2;
+    if (label) {
 
-    left:
-        50%;
+        label.textContent =
+            birthday.gift.name;
 
-    bottom:
-        76px;
+    }
 
-    transform:
-        translateX(-50%);
-
-    width:
-        195px;
-
-    height:
-        42px;
-
-    border-radius:
-        50%;
-
-    background:
-        #f4bdc8;
-}
-
-
-.preview-cake-decor {
-    position:
-        absolute;
-
-    z-index:
-        5;
-
-    left:
-        50%;
-
-    bottom:
-        91px;
-
-    transform:
-        translateX(-50%);
-
-    white-space:
-        nowrap;
-
-    font-size:
-        17px;
-
-    color:
-        #fff6ef;
-}
-
-
-.preview-cake-candles {
-    position:
-        absolute;
-
-    z-index:
-        10;
-
-    left:
-        50%;
-
-    bottom:
-        111px;
-
-    transform:
-        translateX(-50%);
-
-    display:
-        flex;
-
-    gap:
-        6px;
-}
-
-
-.preview-number-candle {
-    min-width:
-        23px;
-
-    height:
-        35px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        5px;
-
-    background:
-        #d17d97;
-
-    color:
-        white;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        21px;
-
-    font-weight:
-        700;
 }
 
 
 /* =========================================================
-   CUSTOMIZATION CARD
+   GIFT → FLOWERS
    ========================================================= */
 
-.customization-card {
-    width:
-        100%;
+$("gift-done")?.addEventListener(
+    "click",
+    () => {
 
-    padding:
-        24px 17px;
+        showScreen(6);
 
-    border:
-        1px solid
-        #ecd9dd;
+        renderFlowers();
 
-    border-radius:
-        27px;
-
-    background:
-        rgba(255,251,249,0.95);
-
-    box-shadow:
-        0 18px 45px
-        rgba(101,58,73,0.1);
-}
-
-
-.option-section {
-    margin-bottom:
-        24px;
-}
-
-
-.option-section h3 {
-    margin-bottom:
-        10px;
-
-    color:
-        #704f58;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        21px;
-}
-
-
-.choice-grid {
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap:
-        9px;
-}
-
-
-.choice-button {
-    min-height:
-        61px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        7px;
-
-    padding:
-        8px;
-
-    border:
-        1px solid
-        #ead5da;
-
-    border-radius:
-        14px;
-
-    background:
-        #fff9f7;
-
-    color:
-        #73535b;
-
-    font-family:
-        "DM Sans",
-        sans-serif;
-
-    font-size:
-        9px;
-
-    cursor:
-        pointer;
-
-    transition:
-        0.2s ease;
-}
-
-
-.choice-button:first-letter {
-    font-size:
-        18px;
-}
-
-
-.choice-button:hover {
-    transform:
-        translateY(-2px);
-}
-
-
-.choice-button.selected {
-    border-color:
-        #c27891;
-
-    background:
-        #fbe8ed;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(194,120,145,0.1);
-}
-
-
-/* =========================================================
-   COLOUR CHOICES
-   ========================================================= */
-
-.colour-grid {
-    display:
-        flex;
-
-    flex-wrap:
-        wrap;
-
-    gap:
-        10px;
-}
-
-
-.colour-choice,
-.gift-colour {
-    width:
-        42px;
-
-    height:
-        42px;
-
-    border:
-        3px solid
-        white;
-
-    border-radius:
-        50%;
-
-    background:
-        var(--choice-color);
-
-    box-shadow:
-        0 0 0 1px
-        #ddc9ce;
-
-    cursor:
-        pointer;
-
-    transition:
-        0.2s ease;
-}
-
-
-.colour-choice:hover,
-.gift-colour:hover {
-    transform:
-        scale(1.08);
-}
-
-
-.colour-choice.selected,
-.gift-colour.selected {
-    box-shadow:
-        0 0 0 2px
-        #b96882;
-
-    transform:
-        scale(1.08);
-}
-
-
-/* =========================================================
-   CUSTOM CAKE TEXT
-   ========================================================= */
-
-.custom-cake-description {
-    margin-bottom:
-        22px;
-}
-
-
-.custom-cake-description label {
-    display:
-        block;
-
-    margin-bottom:
-        4px;
-
-    color:
-        #704f58;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        21px;
-}
-
-
-.custom-cake-description p {
-    margin-bottom:
-        9px;
-
-    color:
-        #a1848c;
-
-    font-size:
-        9px;
-
-    line-height:
-        1.5;
-}
-
-
-.custom-cake-description textarea {
-    width:
-        100%;
-
-    min-height:
-        95px;
-
-    resize:
-        vertical;
-
-    padding:
-        12px;
-
-    border:
-        1px solid
-        #e5d0d6;
-
-    border-radius:
-        14px;
-
-    outline:
-        none;
-
-    background:
-        #fff9f7;
-
-    color:
-        #674b55;
-
-    font-family:
-        "DM Sans",
-        sans-serif;
-
-    font-size:
-        10px;
-
-    line-height:
-        1.5;
-}
-
-
-.custom-cake-description textarea:focus {
-    border-color:
-        #c98298;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(201,130,152,0.1);
-}
-
-
-/* =========================================================
-   GIFT SHOP
-   ========================================================= */
-
-.gift-preview {
-    min-height:
-        250px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        20px;
-
-    background:
-        radial-gradient(
-            circle,
-            #fff,
-            #f9e4e9
-        );
-}
-
-
-.gift-box {
-    position:
-        relative;
-
-    width:
-        170px;
-
-    height:
-        165px;
-
-    transition:
-        transform 0.25s ease;
-}
-
-
-.gift-box:hover {
-    transform:
-        translateY(-5px)
-        rotate(-2deg);
-}
-
-
-.gift-box-body {
-    position:
-        absolute;
-
-    left:
-        15px;
-
-    bottom:
-        10px;
-
-    width:
-        140px;
-
-    height:
-        105px;
-
-    border-radius:
-        5px;
-
-    background:
-        #e59aac;
-
-    box-shadow:
-        0 20px 30px
-        rgba(91,51,62,0.18);
-}
-
-
-.gift-box-lid {
-    position:
-        absolute;
-
-    z-index:
-        4;
-
-    top:
-        30px;
-
-    left:
-        7px;
-
-    width:
-        156px;
-
-    height:
-        30px;
-
-    border-radius:
-        6px;
-
-    background:
-        #d98299;
-}
-
-
-.gift-ribbon-vertical {
-    position:
-        absolute;
-
-    z-index:
-        7;
-
-    left:
-        73px;
-
-    top:
-        30px;
-
-    width:
-        24px;
-
-    height:
-        135px;
-
-    background:
-        #f1cf85;
-}
-
-
-.gift-ribbon-horizontal {
-    position:
-        absolute;
-
-    z-index:
-        8;
-
-    left:
-        7px;
-
-    top:
-        76px;
-
-    width:
-        156px;
-
-    height:
-        18px;
-
-    background:
-        #f1cf85;
-}
-
-
-.gift-bow {
-    position:
-        absolute;
-
-    z-index:
-        12;
-
-    top:
-        0;
-
-    left:
-        58px;
-
-    font-size:
-        35px;
-}
-
-
-.gift-object {
-    position:
-        absolute;
-
-    z-index:
-        10;
-
-    left:
-        50%;
-
-    top:
-        65px;
-
-    transform:
-        translateX(-50%);
-
-    font-size:
-        35px;
-
-    filter:
-        drop-shadow(
-            0 4px 5px
-            rgba(0,0,0,0.18)
-        );
-}
-
-
-.gift-grid {
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap:
-        9px;
-}
-
-
-.gift-choice {
-    min-height:
-        82px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        5px;
-
-    border:
-        1px solid
-        #ead6db;
-
-    border-radius:
-        15px;
-
-    background:
-        #fff9f7;
-
-    color:
-        #72545c;
-
-    cursor:
-        pointer;
-
-    transition:
-        0.2s ease;
-}
-
-
-.gift-choice span {
-    font-size:
-        25px;
-}
-
-
-.gift-choice strong {
-    font-size:
-        8px;
-
-    font-weight:
-        600;
-}
-
-
-.gift-choice:hover {
-    transform:
-        translateY(-3px);
-}
-
-
-.gift-choice.selected {
-    border-color:
-        #c27891;
-
-    background:
-        #fbe8ed;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(194,120,145,0.1);
-}
+    }
+);
 
 
 /* =========================================================
    FLOWER SHOP
    ========================================================= */
 
-.flower-screen {
-    padding-bottom:
-        40px;
-}
+function renderFlowers() {
 
+    const grid =
+        $("flower-grid");
 
-.flower-shop {
-    width:
-        100%;
+    if (!grid) return;
 
-    max-width:
-        700px;
 
-    border-radius:
-        30px;
+    grid.innerHTML = "";
 
-    overflow:
-        hidden;
 
-    background:
-        #fff7f3;
+    flowers.forEach(
+        flower => {
 
-    box-shadow:
-        0 22px 50px
-        rgba(101,58,73,0.13);
-}
+            const quantity =
+                birthday.flowers[
+                    flower.name
+                ] || 0;
 
 
-.flower-display {
-    padding:
-        18px 10px 10px;
+            const card =
+                document.createElement("div");
 
-    background:
-        linear-gradient(
-            145deg,
-            #f9e1e5,
-            #f5eee8
-        );
-}
 
+            card.className =
+                "flower-card";
 
-.flower-category-title {
-    margin:
-        5px 4px 10px;
 
-    color:
-        #a96779;
+            if (quantity > 0) {
 
-    font-size:
-        8px;
+                card.classList.add(
+                    "selected"
+                );
 
-    font-weight:
-        700;
+            }
 
-    letter-spacing:
-        2px;
-}
 
+            card.innerHTML = `
 
-.flower-grid {
-    display:
-        grid;
+                <div class="flower-photo">
 
-    grid-template-columns:
-        repeat(3, 1fr);
+                    ${flowerSVG(
+                        flower.type,
+                        flower.colour
+                    )}
 
-    gap:
-        9px;
+                    <div class="flower-quantity">
+                        ${quantity}
+                    </div>
 
-    max-height:
-        460px;
+                </div>
 
-    overflow-y:
-        auto;
+                <div class="flower-info">
 
-    padding:
-        3px 4px 15px;
-}
+                    <h3>
+                        ${flower.name}
+                    </h3>
 
+                    <p>
+                        ${flower.meaning}
+                    </p>
 
-.flower-grid::-webkit-scrollbar,
-.greenery-grid::-webkit-scrollbar {
-    width:
-        5px;
-}
+                </div>
 
+                <button
+                    class="add-button"
+                    type="button"
+                    aria-label="Add ${flower.name}"
+                >
+                    +
+                </button>
 
-.flower-grid::-webkit-scrollbar-thumb,
-.greenery-grid::-webkit-scrollbar-thumb {
-    background:
-        #cf91a1;
+            `;
 
-    border-radius:
-        10px;
-}
 
+            card
+                .querySelector(
+                    ".add-button"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
 
-.flower-card {
-    position:
-        relative;
+                        birthday.flowers[
+                            flower.name
+                        ] =
+                            (birthday.flowers[
+                                flower.name
+                            ] || 0) + 1;
 
-    min-width:
-        0;
 
-    overflow:
-        hidden;
+                        renderFlowers();
 
-    border:
-        2px solid
-        rgba(255,255,255,0.8);
+                        updateFlowerSummary();
 
-    border-radius:
-        16px;
+                        showToast(
+                            `${flower.name} added 🌸`
+                        );
 
-    background:
-        rgba(255,250,248,0.96);
+                    }
+                );
 
-    box-shadow:
-        0 6px 16px
-        rgba(86,53,61,0.12);
 
-    transition:
-        0.2s ease;
-}
+            grid.appendChild(
+                card
+            );
 
+        }
+    );
 
-.flower-card:hover {
-    transform:
-        translateY(-4px);
-}
 
+    updateFlowerSummary();
 
-.flower-card.selected {
-    border-color:
-        #bd7187;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(189,113,135,0.13);
-}
-
-
-.flower-photo {
-    height:
-        100px;
-
-    background:
-        radial-gradient(
-            circle,
-            #fffdf9,
-            #edddda
-        );
-}
-
-
-.flower-photo svg {
-    width:
-        100%;
-
-    height:
-        100%;
-
-    padding:
-        7px;
-}
-
-
-.flower-quantity {
-    position:
-        absolute;
-
-    top:
-        5px;
-
-    left:
-        5px;
-
-    min-width:
-        21px;
-
-    height:
-        21px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(86,52,61,0.78);
-
-    color:
-        white;
-
-    font-size:
-        8px;
-
-    font-weight:
-        700;
-}
-
-
-.flower-info {
-    padding:
-        7px 6px 33px;
-
-    text-align:
-        center;
-}
-
-
-.flower-info h3 {
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        15px;
-
-    line-height:
-        1;
-
-    color:
-        #664a51;
-}
-
-
-.flower-info p {
-    margin-top:
-        4px;
-
-    color:
-        #a27d84;
-
-    font-size:
-        7px;
-
-    text-transform:
-        uppercase;
-}
-
-
-.add-button {
-    position:
-        absolute;
-
-    right:
-        6px;
-
-    bottom:
-        6px;
-
-    width:
-        28px;
-
-    height:
-        28px;
-
-    border:
-        none;
-
-    border-radius:
-        50%;
-
-    background:
-        #bd7187;
-
-    color:
-        white;
-
-    font-size:
-        19px;
-
-    cursor:
-        pointer;
 }
 
 
 /* =========================================================
-   GREENERY
+   FLOWER SUMMARY
    ========================================================= */
 
-.greenery-grid {
-    display:
-        grid;
+function getFlowerTotal() {
 
-    grid-template-columns:
-        repeat(2, 1fr);
+    return Object.values(
+        birthday.flowers
+    ).reduce(
+        (sum, value) =>
+            sum + value,
+        0
+    );
 
-    gap:
-        10px;
-
-    padding:
-        3px 4px 15px;
 }
 
 
-.greenery-card {
-    position:
-        relative;
+function updateFlowerSummary() {
 
-    overflow:
-        hidden;
+    const total =
+        getFlowerTotal();
 
-    min-height:
-        115px;
 
-    border:
-        2px solid
-        rgba(255,255,255,0.8);
+    const element =
+        $("flower-count");
 
-    border-radius:
-        17px;
+    if (element) {
 
-    background:
-        #f5f8ef;
+        element.textContent =
+            total;
 
-    box-shadow:
-        0 6px 16px
-        rgba(70,92,67,0.1);
+    }
+
 }
 
 
-.greenery-photo {
-    height:
-        80px;
+/* =========================================================
+   FLOWERS → RIBBON
+   ========================================================= */
 
-    background:
-        linear-gradient(
-            135deg,
-            #e4eddf,
-            #f7f4e8
+$("flowers-done")?.addEventListener(
+    "click",
+    () => {
+
+        if (
+            getFlowerTotal() === 0
+        ) {
+
+            showToast(
+                "Choose at least one flower first 🌷"
+            );
+
+            return;
+
+        }
+
+
+        showScreen(7);
+
+        renderRibbonChoices();
+
+    }
+);
+
+
+/* =========================================================
+   RIBBONS
+   ========================================================= */
+
+const ribbons = [
+
+    {
+        name: "Blush Pink",
+        colour: "#d99aaa"
+    },
+
+    {
+        name: "Dusty Rose",
+        colour: "#b9798b"
+    },
+
+    {
+        name: "Lavender",
+        colour: "#a993c7"
+    },
+
+    {
+        name: "Sage Green",
+        colour: "#91a58c"
+    },
+
+    {
+        name: "Baby Blue",
+        colour: "#9dbbd3"
+    },
+
+    {
+        name: "Cream",
+        colour: "#eee1c8"
+    }
+
+];
+
+
+function renderRibbonChoices() {
+
+    const grid =
+        $("ribbon-grid");
+
+    if (!grid) return;
+
+
+    grid.innerHTML = "";
+
+
+    ribbons.forEach(
+        ribbon => {
+
+            const button =
+                document.createElement("button");
+
+            button.type =
+                "button";
+
+            button.className =
+                "ribbon-card";
+
+
+            if (
+                birthday.ribbon.name ===
+                ribbon.name
+            ) {
+
+                button.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            button.innerHTML = `
+
+                <span
+                    class="ribbon-swatch"
+                    style="
+                        --item-color:
+                        ${ribbon.colour}
+                    "
+                ></span>
+
+                <strong>
+                    ${ribbon.name}
+                </strong>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    birthday.ribbon =
+                        ribbon;
+
+                    renderRibbonChoices();
+
+                    updateRibbonPreview();
+
+                }
+            );
+
+
+            grid.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    updateRibbonPreview();
+
+}
+
+
+/* =========================================================
+   RIBBON PREVIEW
+   ========================================================= */
+
+function updateRibbonPreview() {
+
+    const ribbon =
+        $("preview-ribbon");
+
+    if (!ribbon) return;
+
+
+    ribbon.style.background =
+        birthday.ribbon.colour;
+
+}
+
+
+/* =========================================================
+   RIBBON → FINAL
+   ========================================================= */
+
+$("ribbon-done")?.addEventListener(
+    "click",
+    () => {
+
+        showScreen(8);
+
+        buildFinalBirthday();
+
+    }
+);
+
+
+/* =========================================================
+   FINAL BIRTHDAY
+   ========================================================= */
+
+function buildFinalBirthday() {
+
+    const name =
+        birthday.name;
+
+
+    const nameElements =
+        document.querySelectorAll(
+            ".final-name"
         );
-}
 
 
-.greenery-photo svg {
-    width:
-        100%;
+    nameElements.forEach(
+        element => {
 
-    height:
-        100%;
+            element.textContent =
+                name;
 
-    padding:
-        6px;
-}
+        }
+    );
 
 
-.greenery-quantity {
-    position:
-        absolute;
-
-    top:
-        5px;
-
-    left:
-        5px;
-
-    min-width:
-        20px;
-
-    height:
-        20px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(58,84,59,0.8);
-
-    color:
-        white;
-
-    font-size:
-        8px;
-}
-
-
-.greenery-info {
-    padding:
-        7px 35px 7px 8px;
-}
-
-
-.greenery-info h3 {
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        15px;
-
-    color:
-        #536a55;
-}
-
-
-/* =========================================================
-   BOUQUET CONTROLS
-   ========================================================= */
-
-.bouquet-controls {
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        10px;
-
-    padding:
-        12px;
-
-    background:
-        #fffaf8;
-
-    border-top:
-        1px solid
-        #ead8dc;
-}
-
-
-.selection-summary span {
-    display:
-        block;
-
-    color:
-        #a2868e;
-
-    font-size:
-        8px;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        1px;
-}
-
-
-.selection-summary strong {
-    display:
-        block;
-
-    margin-top:
-        3px;
-
-    color:
-        #684c54;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        18px;
-}
-
-
-/* =========================================================
-   WRAPPING
-   ========================================================= */
-
-.wrapping-builder {
-    width:
-        min(100%, 680px);
-}
-
-
-.wrapping-preview {
-    min-height:
-        260px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-}
-
-
-.wrapping-bouquet-preview {
-    position:
-        relative;
-
-    width:
-        250px;
-
-    height:
-        200px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-}
-
-
-.mini-bouquet {
-    font-size:
-        46px;
-
-    letter-spacing:
-        -5px;
-
-    filter:
-        drop-shadow(
-            0 8px 8px
-            rgba(0,0,0,0.1)
+    const ageElements =
+        document.querySelectorAll(
+            ".final-age"
         );
-}
 
 
-.preview-ribbon {
-    position:
-        absolute;
+    ageElements.forEach(
+        element => {
 
-    bottom:
-        23px;
+            element.textContent =
+                birthday.age;
 
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        65px;
-
-    height:
-        19px;
-
-    border-radius:
-        5px;
-
-    background:
-        #d99aaa;
-
-    box-shadow:
-        0 5px 10px
-        rgba(0,0,0,0.1);
-}
+        }
+    );
 
 
-.ribbon-grid {
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap:
-        9px;
-}
+    const finalCake =
+        $("final-cake");
 
 
-.wrapping-choice-grid {
-    display:
-        grid;
+    if (finalCake) {
 
-    grid-template-columns:
-        repeat(2, 1fr);
+        finalCake.textContent =
+            "🎂";
 
-    gap:
-        9px;
-}
+    }
 
 
-.ribbon-card,
-.wrapping-card {
-    min-height:
-        67px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        10px;
-
-    padding:
-        8px;
-
-    border:
-        1px solid
-        #ead6db;
-
-    border-radius:
-        14px;
-
-    background:
-        #fff9f7;
-
-    color:
-        #704f58;
-
-    cursor:
-        pointer;
-
-    transition:
-        0.2s ease;
-}
+    const finalGift =
+        $("final-gift");
 
 
-.ribbon-card:hover,
-.wrapping-card:hover {
-    transform:
-        translateY(-2px);
-}
+    if (finalGift) {
+
+        finalGift.textContent =
+            birthday.gift.object;
+
+    }
 
 
-.ribbon-card.selected,
-.wrapping-card.selected {
-    border-color:
-        #c27891;
+    buildFinalBouquet();
 
-    background:
-        #fbe8ed;
-}
-
-
-.ribbon-swatch,
-.wrapping-swatch {
-    flex-shrink:
-        0;
-
-    width:
-        37px;
-
-    height:
-        48px;
-
-    border-radius:
-        7px;
-
-    background:
-        var(--item-color);
-
-    box-shadow:
-        inset 4px 0
-        rgba(255,255,255,0.25);
-}
-
-
-.ribbon-card strong,
-.wrapping-card strong {
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        16px;
 }
 
 
 /* =========================================================
-   FINAL SCREEN
+   FINAL BOUQUET
    ========================================================= */
 
-.final-screen {
-    position:
-        relative;
+function buildFinalBouquet() {
 
-    justify-content:
-        center;
+    const bouquet =
+        $("final-bouquet");
 
-    text-align:
-        center;
+    if (!bouquet) return;
 
-    background:
-        radial-gradient(
-            circle at 50% 25%,
-            rgba(232,175,199,0.24),
-            transparent 36%
+
+    bouquet.innerHTML = "";
+
+
+    Object.entries(
+        birthday.flowers
+    ).forEach(
+        ([name, quantity]) => {
+
+            const flower =
+                flowers.find(
+                    item =>
+                        item.name === name
+                );
+
+
+            if (!flower) return;
+
+
+            for (
+                let i = 0;
+                i < Math.min(quantity, 5);
+                i++
+            ) {
+
+                const item =
+                    document.createElement("div");
+
+
+                item.className =
+                    "bouquet-flower";
+
+
+                item.innerHTML =
+                    flowerSVG(
+                        flower.type,
+                        flower.colour
+                    );
+
+
+                bouquet.appendChild(
+                    item
+                );
+
+            }
+
+        }
+    );
+
+
+    const ribbon =
+        document.createElement("div");
+
+
+    ribbon.className =
+        "final-bouquet-ribbon";
+
+
+    ribbon.style.background =
+        birthday.ribbon.colour;
+
+
+    bouquet.appendChild(
+        ribbon
+    );
+
+}
+
+
+/* =========================================================
+   MUSIC
+   ========================================================= */
+
+let birthdayAudio =
+    null;
+
+
+function startBirthdaySong() {
+
+    if (birthdayAudio) {
+
+        birthdayAudio.pause();
+
+    }
+
+
+    /*
+       Put your own audio file in the
+       GitHub repository if you want
+       guaranteed playback.
+
+       Example:
+
+       music/happy-birthday.mp3
+    */
+
+    birthdayAudio =
+        new Audio(
+            "music/happy-birthday.mp3"
         );
-}
 
 
-.final-content {
-    width:
-        min(100%, 650px);
-}
+    birthdayAudio.loop =
+        true;
+
+    birthdayAudio.volume =
+        0.55;
 
 
-.final-sparkles {
-    margin-bottom:
-        15px;
+    birthdayAudio.play()
+        .catch(
+            () => {
 
-    color:
-        #d8ad67;
+                /*
+                   Browsers can block
+                   autoplay. The music
+                   button below can be
+                   used to start it.
+                */
 
-    letter-spacing:
-        8px;
+            }
+        );
 
-    font-size:
-        15px;
-}
-
-
-.final-screen h2 {
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(45px, 11vw, 72px);
-
-    line-height:
-        0.88;
-
-    color:
-        #674750;
-}
-
-
-.final-screen h2 em {
-    color:
-        #c27891;
-
-    font-style:
-        italic;
-}
-
-
-.final-intro {
-    max-width:
-        510px;
-
-    margin:
-        17px auto 25px;
-
-    color:
-        #987f87;
-
-    font-size:
-        11px;
-
-    line-height:
-        1.7;
 }
 
 
 /* =========================================================
-   FINAL OBJECTS
+   MUSIC BUTTON
    ========================================================= */
 
-.final-object {
-    display:
-        inline-flex;
+$("music-button")?.addEventListener(
+    "click",
+    () => {
 
-    flex-direction:
-        column;
+        if (!birthdayAudio) {
 
-    align-items:
-        center;
+            startBirthdaySong();
 
-    justify-content:
-        center;
+            showToast(
+                "Birthday music on 🎶"
+            );
 
-    min-width:
-        100px;
+            return;
 
-    margin:
-        6px;
-
-    padding:
-        10px 12px;
-
-    border:
-        1px solid
-        #ead6db;
-
-    border-radius:
-        18px;
-
-    background:
-        rgba(255,250,248,0.85);
-
-    box-shadow:
-        0 8px 20px
-        rgba(101,58,73,0.08);
-}
+        }
 
 
-.final-object > span {
-    color:
-        #a27e88;
+        if (
+            birthdayAudio.paused
+        ) {
 
-    font-size:
-        7px;
+            birthdayAudio.play();
 
-    font-weight:
-        700;
+            showToast(
+                "Music playing 🎶"
+            );
 
-    letter-spacing:
-        1px;
-}
+        } else {
 
+            birthdayAudio.pause();
 
-.final-cake,
-.final-gift,
-.final-bouquet {
-    margin-top:
-        6px;
+            showToast(
+                "Music paused ♡"
+            );
 
-    font-size:
-        39px;
-}
+        }
+
+    }
+);
 
 
-.final-message {
-    max-width:
-        500px;
+/* =========================================================
+   CONFETTI
+   ========================================================= */
 
-    margin:
-        25px auto;
+function launchConfetti() {
 
-    padding:
-        17px;
-
-    border-top:
-        1px solid
-        #ead3d9;
-
-    border-bottom:
-        1px solid
-        #ead3d9;
-}
+    const amount =
+        65;
 
 
-.final-message p {
-    color:
-        #8f747e;
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        20px;
-
-    line-height:
-        1.15;
-}
+        const piece =
+            document.createElement(
+                "div"
+            );
 
 
-.final-message strong {
-    display:
-        block;
-
-    margin-top:
-        8px;
-
-    color:
-        #b26880;
-
-    font-size:
-        10px;
-}
+        piece.className =
+            "confetti-piece";
 
 
-.secondary-button {
-    padding:
-        9px 17px;
+        piece.textContent =
+            [
+                "✦",
+                "♥",
+                "✿",
+                "•",
+                "★"
+            ][
+                Math.floor(
+                    Math.random() * 5
+                )
+            ];
 
-    border:
-        1px solid
-        #e3cbd2;
 
-    border-radius:
-        20px;
+        piece.style.left =
+            `${Math.random() * 100}%`;
 
-    background:
-        #fff9f7;
 
-    color:
-        #a2707f;
+        piece.style.animationDelay =
+            `${Math.random() * 1.5}s`;
 
-    font-size:
-        9px;
 
-    cursor:
-        pointer;
+        piece.style.fontSize =
+            `${8 + Math.random() * 12}px`;
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            () => {
+
+                piece.remove();
+
+            },
+            4000
+        );
+
+    }
+
 }
 
 
@@ -3837,242 +1885,107 @@ body {
    TOAST
    ========================================================= */
 
-.toast {
-    position:
-        fixed;
-
-    z-index:
-        1000;
-
-    left:
-        50%;
-
-    bottom:
-        25px;
-
-    transform:
-        translate(-50%, 20px);
-
-    min-width:
-        180px;
-
-    max-width:
-        90%;
-
-    padding:
-        10px 16px;
-
-    border-radius:
-        22px;
-
-    background:
-        rgba(90,55,66,0.94);
-
-    color:
-        white;
-
-    text-align:
-        center;
-
-    font-size:
-        9px;
-
-    opacity:
-        0;
-
-    pointer-events:
-        none;
-
-    transition:
-        0.3s ease;
-}
+let toastTimer =
+    null;
 
 
-.toast.show {
-    opacity:
-        1;
+function showToast(message) {
 
-    transform:
-        translate(-50%, 0);
-}
+    const toast =
+        $("toast");
 
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .choice-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
+    if (!toast) return;
 
 
-    .flower-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
+    toast.textContent =
+        message;
 
 
-    .party-character {
-        transform:
-            scale(0.82);
-    }
+    toast.classList.add(
+        "show"
+    );
 
 
-    .character-center {
-        transform:
-            translateX(-50%)
-            scale(0.82);
-    }
+    clearTimeout(
+        toastTimer
+    );
 
 
-    .balloon {
-        font-size:
-            38px;
-    }
+    toastTimer =
+        setTimeout(
+            () => {
 
+                toast.classList.remove(
+                    "show"
+                );
 
-    .cake-table {
-        width:
-            88%;
-    }
-
-
-    .party-message {
-        top:
-            56%;
-    }
-
-
-    .party-message h2 {
-        font-size:
-            43px;
-    }
-
-
-    .dark-window {
-        right:
-            2%;
-
-        transform:
-            scale(0.8);
-
-        transform-origin:
-            top right;
-    }
-
-
-    .gift-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-
-    .ribbon-grid,
-    .wrapping-choice-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .bouquet-controls {
-        align-items:
-            stretch;
-    }
-
-}
-
-
-@media (max-width: 380px) {
-
-    .brand strong {
-        font-size:
-            18px;
-    }
-
-
-    .brand small {
-        font-size:
-            6px;
-    }
-
-
-    .brand-icon {
-        width:
-            36px;
-
-        height:
-            36px;
-
-        font-size:
-            19px;
-    }
-
-
-    .flower-grid {
-        gap:
-            7px;
-    }
-
-
-    .flower-photo {
-        height:
-            88px;
-    }
-
-
-    .flower-info h3 {
-        font-size:
-            14px;
-    }
+            },
+            2200
+        );
 
 }
 
 
 /* =========================================================
-   ACCESSIBILITY
+   START AGAIN
    ========================================================= */
 
-button,
-input,
-select,
-textarea {
-    -webkit-tap-highlight-color:
-        transparent;
-}
+$("start-again")?.addEventListener(
+    "click",
+    () => {
+
+        birthday.name =
+            "";
+
+        birthday.age =
+            0;
+
+        birthday.cake = {
+            flavour: "Vanilla",
+            style: "Classic",
+            colour: "#e9a8b9",
+            custom: ""
+        };
+
+        birthday.gift = {
+            object: "🎁",
+            name: "A surprise gift"
+        };
+
+        birthday.flowers =
+            {};
+
+        birthday.ribbon = {
+            name: "Blush Pink",
+            colour: "#d99aaa"
+        };
 
 
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-    outline:
-        2px solid
-        #c27891;
+        const form =
+            $("details-form");
 
-    outline-offset:
-        2px;
-}
+        if (form) {
+
+            form.reset();
+
+        }
 
 
-@media (prefers-reduced-motion: reduce) {
+        showScreen(0);
 
-    *,
-    *::before,
-    *::after {
-        animation-duration:
-            0.01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            0.01ms !important;
-
-        scroll-behavior:
-            auto !important;
     }
+);
 
-}
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        showScreen(0);
+
+    }
+);
