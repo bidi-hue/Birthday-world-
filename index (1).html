@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Birthday For You 🎀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fff0f3;
+            color: #594145;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .screen {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .screen.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: scale(1) translateY(0); }
+            50% { opacity: 0.8; transform: scale(0.95) translateY(-2px); }
+        }
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+        .candle-flame { animation: flicker 0.8s ease-in-out infinite alternate; }
+        .animate-bounce-gentle { animation: bounce-gentle 2s ease-in-out infinite; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fff0f3; }
+        ::-webkit-scrollbar-thumb { background: #ffb3c1; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-[#ffb3c1] selection:text-white">
+
+    <header class="w-full py-4 px-6 flex justify-between items-center z-50">
+        <div class="flex items-center gap-2">
+            <span class="text-xl">🎀</span>
+            <span class="font-semibold text-sm tracking-wide opacity-80 serif-font">A Little Birthday For You</span>
+        </div>
+        <button id="musicToggleBtn" class="flex items-center gap-2 px-4 py-2 bg-white/80 hover:bg-white text-[#d4798b] text-xs font-semibold rounded-full shadow-sm backdrop-blur-sm transition-all border border-[#ffccd5]">
+            <span id="musicIcon">🎵</span> <span id="musicText">Play Music</span>
+        </button>
+    </header>
+
+    <div class="w-full bg-[#ffccd5]/30 h-1.5 fixed top-0 left-0 z-50">
+        <div id="progressBar" class="bg-[#d4798b] h-1.5 transition-all duration-500 w-[12%]"></div>
+    </div>
+
+    <main class="flex-1 flex items-center justify-center p-4 sm:p-6 max-w-3xl mx-auto w-full relative">
+
+        <!-- SCREEN 1: WELCOME -->
+        <section id="screen-1" class="screen active flex-col items-center text-center py-8 w-full">
+            <div class="text-5xl sm:text-6xl mb-6 animate-float">🧸✨</div>
+            <h1 class="text-3xl sm:text-5xl font-bold text-[#b5586d] mb-3">A Little Birthday For You</h1>
+            <p class="text-sm sm:text-base opacity-75 mb-8 italic serif-font">A tiny corner of the internet made just for you.</p>
+            
+            <div class="bg-white/70 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-lg border border-[#ffccd5] max-w-lg w-full mb-8 relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 text-6xl opacity-10">🎂</div>
+                <p class="text-lg font-medium text-[#7a5960] mb-3">“You deserve a birthday that feels a little special.”</p>
+                <p class="text-sm opacity-80 leading-relaxed">“So here's a tiny birthday world where you get to choose everything.”</p>
+            </div>
+
+            <button onclick="goToScreen(2)" class="px-8 py-4 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 text-base tracking-wide flex items-center gap-2">
+                Start my birthday ♡
+            </button>
+            <p class="text-xs opacity-60 mt-4">You get to choose everything.</p>
+        </section>
+
+        <!-- SCREEN 2: PERSONAL DETAILS -->
+        <section id="screen-2" class="screen flex-col items-center w-full py-4">
+            <div class="text-center mb-6">
+                <span class="text-3xl mb-2 block animate-float">🌷</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-[#b5586d]">Let's get acquainted</h2>
+                <p class="text-sm opacity-75 mt-1">Tell us a little about your special day.</p>
+            </div>
+
+            <div class="bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-lg border border-[#ffccd5] w-full max-w-md space-y-6">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#b5586d] mb-2">What should we call you?</label>
+                    <input type="text" id="userNameInput" placeholder="Your name..." class="w-full px-4 py-3 rounded-xl border border-[#ffccd5] focus:outline-none focus:ring-2 focus:ring-[#d4798b] bg-[#fff0f3]/30 text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#b5586d] mb-2">What age are you turning?</label>
+                    <input type="number" id="userAgeInput" placeholder="e.g. 21" min="1" max="120" class="w-full px-4 py-3 rounded-xl border border-[#ffccd5] focus:outline-none focus:ring-2 focus:ring-[#d4798b] bg-[#fff0f3]/30 text-sm">
+                    <span class="text-[11px] opacity-60 mt-1 block">This creates your custom number candles!</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#b5586d] mb-2">Choose your birthday vibe</label>
+                    <div class="grid grid-cols-2 gap-3" id="vibeOptions">
+                        <button type="button" onclick="selectVibe(this, 'Soft Pink')" class="vibe-btn p-3 rounded-xl border-2 border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] transition-all text-left flex items-center gap-2 active">
+                            <span>🎀</span> Soft Pink
+                        </button>
+                        <button type="button" onclick="selectVibe(this, 'Pretty Garden')" class="vibe-btn p-3 rounded-xl border-2 border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] transition-all text-left flex items-center gap-2">
+                            <span>🌷</span> Pretty Garden
+                        </button>
+                        <button type="button" onclick="selectVibe(this, 'Strawberry Sweet')" class="vibe-btn p-3 rounded-xl border-2 border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] transition-all text-left flex items-center gap-2">
+                            <span>🍓</span> Strawberry
+                        </button>
+                        <button type="button" onclick="selectVibe(this, 'Dreamy & Magical')" class="vibe-btn p-3 rounded-xl border-2 border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] transition-all text-left flex items-center gap-2">
+                            <span>✨</span> Dreamy
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="validateDetails()" class="w-full py-3.5 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-sm mt-2 flex items-center justify-center gap-2">
+                    Let's make your birthday →
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: LIGHTS OFF -->
+        <section id="screen-3" class="screen flex-col items-center text-center py-8 w-full bg-[#2a1b2d] text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-40 pointer-events-none">
+                <div class="absolute top-10 left-12 text-xs">✨</div>
+                <div class="absolute top-24 right-16 text-sm">⭐</div>
+                <div class="absolute bottom-20 left-20 text-xs">✨</div>
+                <div class="absolute bottom-12 right-24 text-sm">⭐</div>
+            </div>
+
+            <div class="text-5xl sm:text-6xl mb-6 animate-pulse-slow">🌙</div>
+            <h2 id="lightsText1" class="text-2xl sm:text-3xl font-bold mb-3 text-[#ffccd5]">Wait...</h2>
+            <p id="lightsText2" class="text-sm opacity-80 mb-8 max-w-xs">Why are the lights off? Someone forgot to turn them on.</p>
+
+            <button onclick="turnOnLights()" class="px-8 py-4 bg-[#ffb3c1] hover:bg-[#ffa1b2] text-[#2a1b2d] font-bold rounded-full shadow-lg transition-all transform hover:scale-105 text-sm tracking-wide">
+                Turn on the lights ✨
+            </button>
+        </section>
+
+        <!-- SCREEN 4: BIRTHDAY PARTY (Anime Cake & Celebration) -->
+        <section id="screen-4" class="screen flex-col items-center text-center py-6 w-full">
+            <div class="mb-4">
+                <span class="text-xs uppercase tracking-widest text-[#d4798b] font-bold">The Grand Room Reveal</span>
+                <h2 id="partyGreeting" class="text-2xl sm:text-4xl font-bold text-[#b5586d] mt-1">HAPPY BIRTHDAY</h2>
+            </div>
+
+            <div class="bg-gradient-to-b from-white to-[#fff0f3] p-6 sm:p-8 rounded-3xl shadow-xl border border-[#ffccd5] w-full max-w-lg mb-6 relative overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 flex justify-around opacity-60 text-xs pt-2">
+                    <span>🎀 🎈 🌸 🎈 🎀</span>
+                </div>
+
+                <!-- Anime-style illustrated cake container -->
+                <div class="my-6 flex flex-col items-center">
+                    <div class="relative w-40 h-40 bg-gradient-to-tr from-[#ffccd5] to-[#fff0f3] rounded-3xl shadow-lg flex items-center justify-center border-4 border-[#ffb3c1] animate-bounce-gentle">
+                        <div id="partyCandlesContainer" class="absolute -top-12 flex gap-2"></div>
+                        <!-- Anime strawberry cake illustration style -->
+                        <div class="absolute inset-2 border-2 border-dashed border-[#d4798b]/40 rounded-2xl flex flex-col items-center justify-center bg-white/60">
+                            <span class="text-4xl">🎂</span>
+                            <span class="text-[10px] font-bold text-[#b5586d] mt-1 uppercase tracking-wider">Strawberry Dream</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-base font-medium text-[#7a5960] mb-2">“Look who's here...”</p>
+                <p class="text-sm opacity-80 mb-6">Your anime birthday room is fully prepared with glowing fairy lights and friends.</p>
+
+                <button onclick="goToScreen(5)" class="w-full py-3.5 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-sm">
+                    Design my dream cake →
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 5: CUSTOM CAKE SHOP -->
+        <section id="screen-5" class="screen flex-col items-center w-full py-2">
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-bold text-[#b5586d]">Design your dream cake</h2>
+                <p class="text-xs opacity-75">Because your birthday cake should actually look like something YOU would choose.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+                <!-- Live Preview Card -->
+                <div class="bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-md border border-[#ffccd5] flex flex-col items-center justify-center relative">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-[#d4798b] mb-4">Live Cake Preview</span>
+                    <div id="previewCakeBox" class="w-32 h-32 rounded-2xl flex flex-col items-center justify-center relative shadow-inner transition-all duration-300 bg-[#ffd1dc] border-2 border-[#ffb3c1]">
+                        <div id="previewCandles" class="absolute -top-8 flex gap-1.5"></div>
+                        <span id="previewShapeEmoji" class="text-2xl">🎂</span>
+                        <div id="previewDecoBadge" class="text-[10px] bg-white/80 px-2 py-0.5 rounded-full mt-2 font-semibold text-[#b5586d]">Strawberry 🍓</div>
+                    </div>
+                    <div id="previewCakeMessageText" class="mt-4 text-xs font-semibold italic text-[#b5586d] text-center max-w-[200px] truncate"></div>
+                </div>
+
+                <!-- Customization Options -->
+                <div class="bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-md border border-[#ffccd5] space-y-4 text-xs">
+                    <div>
+                        <label class="font-bold uppercase tracking-wider text-[#b5586d] block mb-1">Shape</label>
+                        <div class="grid grid-cols-3 gap-2" id="cakeShapes">
+                            <button onclick="setCakeShape('Round', '🎂')" class="cake-shape-btn p-2 rounded-lg border border-[#ffccd5] font-medium bg-[#fff0f3] text-center active">Round</button>
+                            <button onclick="setCakeShape('Heart', '💖')" class="cake-shape-btn p-2 rounded-lg border border-[#ffccd5] font-medium bg-white text-center">Heart</button>
+                            <button onclick="setCakeShape('Two-tier', '🍰')" class="cake-shape-btn p-2 rounded-lg border border-[#ffccd5] font-medium bg-white text-center">Two-tier</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold uppercase tracking-wider text-[#b5586d] block mb-1">Flavour</label>
+                        <select id="cakeFlavour" onchange="updateCakePreview()" class="w-full p-2.5 rounded-lg border border-[#ffccd5] bg-white text-xs focus:outline-none focus:ring-1 focus:ring-[#d4798b]">
+                            <option value="Strawberry 🍓">Strawberry 🍓</option>
+                            <option value="Chocolate 🍫">Chocolate 🍫</option>
+                            <option value="Vanilla 🍦">Vanilla 🍦</option>
+                            <option value="Red Velvet ❤️">Red Velvet ❤️</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="font-bold uppercase tracking-wider text-[#b5586d] block mb-1">Frosting Color</label>
+                        <div class="flex gap-2" id="frostingColors">
+                            <button onclick="setFrostingColor('#ffd1dc', 'Blush Pink')" class="w-7 h-7 rounded-full bg-[#ffd1dc] border-2 border-white shadow-sm ring-2 ring-[#d4798b] frosting-btn"></button>
+                            <button onclick="setFrostingColor('#fff8e7', 'Cream')" class="w-7 h-7 rounded-full bg-[#fff8e7] border-2 border-white shadow-sm frosting-btn"></button>
+                            <button onclick="setFrostingColor('#e6e6fa', 'Lavender')" class="w-7 h-7 rounded-full bg-[#e6e6fa] border-2 border-white shadow-sm frosting-btn"></button>
+                            <button onclick="setFrostingColor('#ffdab9', 'Peach')" class="w-7 h-7 rounded-full bg-[#ffdab9] border-2 border-white shadow-sm frosting-btn"></button>
+                            <button onclick="setFrostingColor('#c1e1c1', 'Sage')" class="w-7 h-7 rounded-full bg-[#c1e1c1] border-2 border-white shadow-sm frosting-btn"></button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold uppercase tracking-wider text-[#b5586d] block mb-1">Decoration</label>
+                        <select id="cakeDeco" onchange="updateCakePreview()" class="w-full p-2.5 rounded-lg border border-[#ffccd5] bg-white text-xs focus:outline-none focus:ring-1 focus:ring-[#d4798b]">
+                            <option value="Flowers 🌸">Flowers 🌸</option>
+                            <option value="Hearts 💗">Hearts 💗</option>
+                            <option value="Pearls 🤍">Pearls 🤍</option>
+                            <option value="Sprinkles ✨">Sprinkles ✨</option>
+                            <option value="Bows 🎀">Bows 🎀</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="font-bold uppercase tracking-wider text-[#b5586d] block mb-1">Cake Message</label>
+                        <input type="text" id="cakeMessageInput" oninput="updateCakePreview()" placeholder="e.g. Happy Birthday ♡" class="w-full p-2.5 rounded-lg border border-[#ffccd5] bg-white text-xs">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="goToScreen(6)" class="mt-6 px-8 py-3 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-xs">
+                This is my cake →
+            </button>
+        </section>
+
+        <!-- SCREEN 6: INTERACTIVE GIFT OPENING (Virtual Teddy Bear) -->
+        <section id="screen-6" class="screen flex-col items-center text-center w-full py-4">
+            <div class="mb-4">
+                <h2 class="text-2xl font-bold text-[#b5586d]">A Special Gift For You 🎁</h2>
+                <p class="text-xs opacity-75">Tap the gift box below to unwrap your surprise!</p>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-[#ffccd5] w-full max-w-md flex flex-col items-center justify-center min-h-[300px]">
+                <!-- Gift Box State -->
+                <div id="giftBoxContainer" onclick="openGiftBox()" class="cursor-pointer flex flex-col items-center transition-transform transform hover:scale-105 active:scale-95">
+                    <div class="text-7xl mb-3 animate-bounce-gentle">🎁</div>
+                    <span class="text-xs font-bold text-[#d4798b] bg-[#fff0f3] px-4 py-2 rounded-full border border-[#ffccd5] shadow-sm">Tap to open gift ♡</span>
+                </div>
+
+                <!-- Revealed Teddy Bear State (Initially Hidden) -->
+                <div id="revealedGiftContainer" class="hidden flex flex-col items-center animate-pulse-slow">
+                    <div class="text-7xl mb-3">🧸✨</div>
+                    <h3 class="text-lg font-bold text-[#b5586d] mb-1">A Giant Virtual Teddy Bear!</h3>
+                    <p class="text-xs text-[#7a5960] italic max-w-xs">“Sent with warm hugs, comforting cuddles, and endless love just for you.”</p>
+                </div>
+            </div>
+
+            <button id="giftNextBtn" onclick="goToScreen(7)" class="mt-6 px-8 py-3 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-xs opacity-50 pointer-events-none">
+                Pick my flowers →
+            </button>
+        </section>
+
+        <!-- SCREEN 7: VIRTUAL FLOWER BOUQUET BUILDER -->
+        <section id="screen-7" class="screen flex-col items-center w-full py-2">
+            <div class="text-center mb-3">
+                <h2 class="text-2xl font-bold text-[#b5586d]">Build your custom bouquet</h2>
+                <p class="text-xs opacity-75">Tap flowers to add them to your live bouquet arrangement.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
+                <!-- Visual Bouquet Canvas (Matches Reference Style) -->
+                <div class="bg-gradient-to-b from-white to-[#fff0f3] p-4 rounded-3xl shadow-md border border-[#ffccd5] flex flex-col items-center justify-center relative min-h-[280px]">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#d4798b] mb-2">Live Bouquet Preview</span>
+                    
+                    <!-- Bouquet Visual Container -->
+                    <div id="bouquetCanvas" class="relative w-48 h-56 flex flex-col items-center justify-end pb-4">
+                        <!-- Flowers cluster on top -->
+                        <div id="bouquetFlowersDisplay" class="absolute top-2 w-44 h-28 flex flex-wrap items-center justify-center gap-1.5 z-20 overflow-hidden px-2"></div>
+                        
+                        <!-- Stems -->
+                        <div class="absolute bottom-12 w-20 h-24 bg-[#76a084] rounded-b-xl opacity-80 z-10"></div>
+                        
+                        <!-- Wrapper Cone -->
+                        <div class="absolute bottom-2 w-36 h-32 bg-[#f4cbba] rounded-b-3xl border-2 border-[#e3b5a4] z-30 flex items-end justify-center pb-3 shadow-sm">
+                            <!-- Ribbon bow -->
+                            <div class="text-2xl z-40">🎀</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flower Picker Options -->
+                <div class="bg-white/90 backdrop-blur-md p-4 rounded-3xl shadow-md border border-[#ffccd5] flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#b5586d] block mb-2">Click to add flowers:</span>
+                        <div class="grid grid-cols-2 gap-2 max-h-52 overflow-y-auto pr-1" id="flowerOptionsGrid">
+                            <button onclick="addFlowerToBouquet('🌹', 'Pink Rose')" class="p-2 rounded-xl border border-[#ffccd5] bg-white hover:bg-[#fff0f3] text-xs font-medium text-[#7a5960] flex items-center gap-2 transition-all">
+                                <span class="text-lg">🌹</span> Pink Rose
+                            </button>
+                            <button onclick="addFlowerToBouquet('🌷', 'Tulip')" class="p-2 rounded-xl border border-[#ffccd5] bg-white hover:bg-[#fff0f3] text-xs font-medium text-[#7a5960] flex items-center gap-2 transition-all">
+                                <span class="text-lg">🌷</span> Tulip
+                            </button>
+                            <button onclick="addFlowerToBouquet('🌻', 'Sunflower')" class="p-2 rounded-xl border border-[#ffccd5] bg-white hover:bg-[#fff0f3] text-xs font-medium text-[#7a5960] flex items-center gap-2 transition-all">
+                                <span class="text-lg">🌻</span> Sunflower
+                            </button>
+                            <button onclick="addFlowerToBouquet('🌸', 'Cherry Blossom')" class="p-2 rounded-xl border border-[#ffccd5] bg-white hover:bg-[#fff0f3] text-xs font-medium text-[#7a5960] flex items-center gap-2 transition-all">
+                                <span class="text-lg">🌸</span> Cherry Blossom
+                            </button>
+                            <button onclick="addFlowerToBouquet('🌼', 'Daisy')" class="p-2 rounded-xl border border-[#ffccd5] bg-white hover:bg-[#fff0f3] text-xs font-medium text-[#7a5960] flex items-center gap-2 transition-all">
+                                <span class="text-lg">🌼</span> Daisy
+                            </button>
+                            <button onclick="addFlowerToBouquet('💜', 'Lavender')" class="p-2 rounded-xl border border-[#ffccd5] bg-white hover:bg-[#fff0f3] text-xs font-medium text-[#7a5960] flex items-center gap-2 transition-all">
+                                <span class="text-lg">💜</span> Lavender
+                            </button>
+                        </div>
+                    </div>
+                    <button onclick="clearBouquet()" class="mt-3 text-[11px] text-[#d4798b] underline hover:text-[#c26779] text-center block">Clear bouquet</button>
+                </div>
+            </div>
+
+            <button onclick="goToScreen(8)" class="mt-4 px-8 py-3 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-xs">
+                Choose ribbon wrapping →
+            </button>
+        </section>
+
+        <!-- SCREEN 8: RIBBON / WRAPPING -->
+        <section id="screen-8" class="screen flex-col items-center w-full py-6">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-[#b5586d]">Choose your ribbon</h2>
+                <p class="text-xs opacity-75">Tie it all together with a beautiful wrapping ribbon.</p>
+            </div>
+
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-md border border-[#ffccd5] w-full max-w-md mb-6">
+                <div class="grid grid-cols-2 gap-3" id="ribbonGrid">
+                    <button onclick="selectRibbon('Blush Pink', '#ffd1dc')" class="ribbon-btn p-3 rounded-xl border border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] flex items-center gap-2 active">
+                        <span class="w-4 h-4 rounded-full bg-[#ffd1dc] inline-block"></span> Blush Pink
+                    </button>
+                    <button onclick="selectRibbon('Dusty Rose', '#d4a5a5')" class="ribbon-btn p-3 rounded-xl border border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] flex items-center gap-2">
+                        <span class="w-4 h-4 rounded-full bg-[#d4a5a5] inline-block"></span> Dusty Rose
+                    </button>
+                    <button onclick="selectRibbon('Lavender', '#e6e6fa')" class="ribbon-btn p-3 rounded-xl border border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] flex items-center gap-2">
+                        <span class="w-4 h-4 rounded-full bg-[#e6e6fa] inline-block"></span> Lavender
+                    </button>
+                    <button onclick="selectRibbon('Sage', '#c1e1c1')" class="ribbon-btn p-3 rounded-xl border border-[#ffccd5] bg-white text-xs font-medium hover:border-[#d4798b] flex items-center gap-2">
+                        <span class="w-4 h-4 rounded-full bg-[#c1e1c1] inline-block"></span> Sage
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="generateFinalReveal()" class="px-8 py-3 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-xs">
+                Show me my birthday ♡
+            </button>
+        </section>
+
+        <!-- SCREEN 9: FINAL BIRTHDAY REVEAL -->
+        <section id="screen-9" class="screen flex-col items-center text-center w-full py-4 relative">
+            <div class="mb-4">
+                <span class="text-xl">✨🎉🎀</span>
+                <h2 id="finalTitle" class="text-3xl font-bold text-[#b5586d] mt-1">Happy Birthday, [Name] ♡</h2>
+                <p class="text-xs opacity-75 italic serif-font mt-1">This little birthday world was made for you.</p>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-xl border border-[#ffccd5] w-full max-w-lg mb-6 space-y-6 text-left">
+                <!-- Cake Summary -->
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#fff0f3] border border-[#ffccd5]">
+                    <div id="finalCakePreviewBox" class="w-16 h-16 rounded-xl flex items-center justify-center text-2xl relative shadow-sm" style="background-color: #ffd1dc;">
+                        🎂
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-[#d4798b]">Your Anime Cake</span>
+                        <h4 id="finalCakeName" class="text-sm font-bold text-[#7a5960]">Strawberry Cake</h4>
+                        <p id="finalCakeMsgDisplay" class="text-xs opacity-80 italic"></p>
+                    </div>
+                </div>
+
+                <!-- Gift Summary -->
+                <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#fff0f3] border border-[#ffccd5]">
+                    <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center text-3xl shadow-sm border border-[#ffccd5]">
+                        🧸
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-[#d4798b]">Your Birthday Gift</span>
+                        <h4 class="text-sm font-bold text-[#7a5960]">Giant Virtual Teddy Bear</h4>
+                    </div>
+                </div>
+
+                <!-- Bouquet Summary -->
+                <div class="p-4 rounded-2xl bg-[#fff0f3] border border-[#ffccd5] flex flex-col items-center text-center">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#d4798b] block mb-2">Your Custom Bouquet (Ribbon: <span id="finalRibbonName">Blush Pink</span>)</span>
+                    <div id="finalBouquetPreviewBox" class="relative w-36 h-40 flex items-center justify-center bg-white/60 rounded-2xl border border-[#ffccd5] p-2">
+                        <div id="finalBouquetFlowers" class="flex flex-wrap gap-1 items-center justify-center text-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Sweet Message -->
+                <div class="text-center pt-2">
+                    <p class="text-xs font-medium text-[#7a5960] mb-1">“You picked every flower, every detail, your cake and your gift.”</p>
+                    <p class="text-xs opacity-80">I hope this tiny corner of the internet made your day feel a little brighter. ♡</p>
+                </div>
+            </div>
+
+            <button onclick="restartExperience()" class="px-6 py-3 bg-[#d4798b] hover:bg-[#c26779] text-white font-semibold rounded-xl shadow-md transition-all text-xs">
+                Start over ↺
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        const state = {
+            name: "Friend",
+            age: 21,
+            vibe: "Soft Pink",
+            cake: {
+                shape: "Round",
+                emoji: "🎂",
+                flavour: "Strawberry 🍓",
+                frostingColor: "#ffd1dc",
+                decoration: "Flowers 🌸",
+                message: "Happy Birthday ♡"
+            },
+            bouquetFlowers: ['🌹', '🌷', '🌸', '🌻'],
+            ribbon: "Blush Pink"
+        };
+
+        let currentScreen = 1;
+
+        function goToScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(`screen-${screenNum}`);
+            if (target) {
+                target.classList.add('active');
+                currentScreen = screenNum;
+                updateProgressBar();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateProgressBar() {
+            const progressPercentages = { 1: 11, 2: 22, 3: 33, 4: 44, 5: 55, 6: 66, 7: 77, 8: 88, 9: 100 };
+            document.getElementById('progressBar').style.width = `${progressPercentages[currentScreen] || 100}%`;
+        }
+
+        function selectVibe(btn, vibeName) {
+            document.querySelectorAll('.vibe-btn').forEach(b => b.classList.remove('active', 'border-[#d4798b]'));
+            btn.classList.add('active', 'border-[#d4798b]');
+            state.vibe = vibeName;
+        }
+
+        function validateDetails() {
+            const nameInput = document.getElementById('userNameInput').value.trim();
+            const ageInput = document.getElementById('userAgeInput').value.trim();
+
+            if (!nameInput) {
+                alertCustom("Please enter your name so we can celebrate you!");
+                return;
+            }
+            if (!ageInput || isNaN(ageInput) || ageInput <= 0) {
+                alertCustom("Please enter a valid age for your number candles!");
+                return;
+            }
+
+            state.name = nameInput;
+            state.age = parseInt(ageInput, 10);
+
+            document.getElementById('partyGreeting').innerText = `HAPPY BIRTHDAY, ${state.name.toUpperCase()} ♡`;
+            renderPartyCandles();
+
+            goToScreen(3);
+        }
+
+        function turnOnLights() {
+            goToScreen(4);
+        }
+
+        function renderPartyCandles() {
+            const container = document.getElementById('partyCandlesContainer');
+            container.innerHTML = '';
+            const ageStr = state.age.toString();
+
+            for (let char of ageStr) {
+                const candleEl = document.createElement('div');
+                candleEl.className = "flex flex-col items-center animate-pulse-slow";
+                candleEl.innerHTML = `
+                    <div class="text-xs candle-flame">🔥</div>
+                    <div class="w-6 h-8 bg-white rounded-md border border-[#ffccd5] flex items-center justify-center font-bold text-xs text-[#d4798b] shadow-sm">${char}</div>
+                `;
+                container.appendChild(candleEl);
+            }
+        }
+
+        function renderPreviewCandles() {
+            const container = document.getElementById('previewCandles');
+            container.innerHTML = '';
+            const ageStr = state.age.toString();
+
+            for (let char of ageStr) {
+                const candleEl = document.createElement('div');
+                candleEl.className = "flex flex-col items-center";
+                candleEl.innerHTML = `
+                    <div class="text-[10px] candle-flame">🔥</div>
+                    <div class="w-4 h-6 bg-white rounded border border-[#ffccd5] flex items-center justify-center font-bold text-[10px] text-[#d4798b]">${char}</div>
+                `;
+                container.appendChild(candleEl);
+            }
+        }
+
+        function setCakeShape(shapeName, emoji) {
+            document.querySelectorAll('.cake-shape-btn').forEach(b => {
+                b.classList.remove('bg-[#fff0f3]', 'active');
+                b.classList.add('bg-white');
+            });
+            event.target.classList.add('bg-[#fff0f3]', 'active');
+            state.cake.shape = shapeName;
+            state.cake.emoji = emoji;
+            updateCakePreview();
+        }
+
+        function setFrostingColor(colorHex, colorName) {
+            state.cake.frostingColor = colorHex;
+            updateCakePreview();
+        }
+
+        function updateCakePreview() {
+            state.cake.flavour = document.getElementById('cakeFlavour').value;
+            state.cake.decoration = document.getElementById('cakeDeco').value;
+            state.cake.message = document.getElementById('cakeMessageInput').value;
+
+            const box = document.getElementById('previewCakeBox');
+            box.style.backgroundColor = state.cake.frostingColor;
+            document.getElementById('previewShapeEmoji').innerText = state.cake.emoji;
+            document.getElementById('previewDecoBadge').innerText = state.cake.flavour.split(' ')[0] + " • " + state.cake.decoration.split(' ')[0];
+            document.getElementById('previewCakeMessageText').innerText = state.cake.message;
+
+            renderPreviewCandles();
+        }
+
+        // Gift Opening Interaction
+        function openGiftBox() {
+            document.getElementById('giftBoxContainer').classList.add('hidden');
+            document.getElementById('revealedGiftContainer').classList.remove('hidden');
+            const nextBtn = document.getElementById('giftNextBtn');
+            nextBtn.classList.remove('opacity-50', 'pointer-events-none');
+            triggerConfetti();
+        }
+
+        // Flower Bouquet Visual Builder
+        function addFlowerToBouquet(emoji, name) {
+            state.bouquetFlowers.push(emoji);
+            renderBouquetCanvas();
+        }
+
+        function clearBouquet() {
+            state.bouquetFlowers = [];
+            renderBouquetCanvas();
+        }
+
+        function renderBouquetCanvas() {
+            const container = document.getElementById('bouquetFlowersDisplay');
+            container.innerHTML = '';
+            if (state.bouquetFlowers.length === 0) {
+                container.innerHTML = '<span class="text-[10px] text-[#b5586d] italic">Tap flowers below!</span>';
+                return;
+            }
+            state.bouquetFlowers.forEach(emoji => {
+                const span = document.createElement('span');
+                span.className = "text-xl transform hover:scale-125 transition-transform cursor-pointer";
+                span.innerText = emoji;
+                container.appendChild(span);
+            });
+        }
+
+        function selectRibbon(ribbonName, hex) {
+            document.querySelectorAll('.ribbon-btn').forEach(b => b.classList.remove('active', 'border-[#d4798b]'));
+            event.currentTarget.classList.add('active', 'border-[#d4798b]');
+            state.ribbon = ribbonName;
+        }
+
+        function generateFinalReveal() {
+            document.getElementById('finalTitle').innerText = `Happy Birthday, ${state.name} ♡`;
+            document.getElementById('finalCakePreviewBox').style.backgroundColor = state.cake.frostingColor;
+            document.getElementById('finalCakePreviewBox').innerText = state.cake.emoji;
+            document.getElementById('finalCakeName').innerText = `${state.cake.flavour} (${state.cake.shape} Cake)`;
+            document.getElementById('finalCakeMsgDisplay').innerText = state.cake.message ? `"${state.cake.message}"` : '';
+
+            // Final Bouquet Preview
+            const finalBouqContainer = document.getElementById('finalBouquetFlowers');
+            finalBouqContainer.innerHTML = '';
+            state.bouquetFlowers.forEach(emoji => {
+                const s = document.createElement('span');
+                s.innerText = emoji;
+                finalBouqContainer.appendChild(s);
+            });
+
+            document.getElementById('finalRibbonName').innerText = state.ribbon;
+
+            goToScreen(9);
+            triggerConfetti();
+        }
+
+        function restartExperience() {
+            currentScreen = 1;
+            goToScreen(1);
+        }
+
+        function alertCustom(msg) {
+            const alertBox = document.createElement('div');
+            alertBox.className = "fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4";
+            alertBox.innerHTML = `
+                <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-xl border border-[#ffccd5]">
+                    <p class="text-sm font-medium text-[#7a5960] mb-4">${msg}</p>
+                    <button onclick="this.closest('.fixed').remove()" class="px-5 py-2 bg-[#d4798b] text-white rounded-xl text-xs font-semibold">Got it ♡</button>
+                </div>
+            `;
+            document.body.appendChild(alertBox);
+        }
+
+        let audioCtx = null;
+        let isPlayingMusic = false;
+        let musicInterval = null;
+
+        document.getElementById('musicToggleBtn').addEventListener('click', () => {
+            if (!isPlayingMusic) {
+                startBirthdayMelody();
+            } else {
+                stopBirthdayMelody();
+            }
+        });
+
+        function startBirthdayMelody() {
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                isPlayingMusic = true;
+                document.getElementById('musicIcon').innerText = '🔊';
+                document.getElementById('musicText').innerText = 'Playing Melody';
+
+                const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63, 261.63, 261.63, 293.66, 261.63, 392.00, 349.23];
+                const durations = [0.4, 0.4, 0.8, 0.8, 0.8, 1.2, 0.4, 0.4, 0.8, 0.8, 0.8, 1.2];
+                let index = 0;
+
+                function playNextNote() {
+                    if (!isPlayingMusic || !audioCtx) return;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(notes[index], audioCtx.currentTime);
+
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + durations[index]);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + durations[index]);
+
+                    index = (index + 1) % notes.length;
+                    musicInterval = setTimeout(playNextNote, durations[index] * 800);
+                }
+
+                playNextNote();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function stopBirthdayMelody() {
+            isPlayingMusic = false;
+            if (musicInterval) clearTimeout(musicInterval);
+            if (audioCtx) {
+                audioCtx.close();
+                audioCtx = null;
+            }
+            document.getElementById('musicIcon').innerText = '🎵';
+            document.getElementById('musicText').innerText = 'Play Music';
+        }
+
+        function triggerConfetti() {
+            const symbols = ['✨', '🌸', '💖', '⭐', '🎀', '🌷'];
+            for (let i = 0; i < 35; i++) {
+                const el = document.createElement('div');
+                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                el.className = "absolute text-lg pointer-events-none z-50 transition-all duration-1000";
+                el.style.left = `${Math.random() * 100}%`;
+                el.style.top = `-20px`;
+                document.body.appendChild(el);
+
+                const destX = (Math.random() - 0.5) * 200;
+                const destY = window.innerHeight * 0.7 + Math.random() * 200;
+
+                setTimeout(() => {
+                    el.style.transform = `translate(${destX}px, ${destY}px) rotate(${Math.random() * 360}deg)`;
+                    el.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => el.remove(), 2500);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderBouquetCanvas();
+            updateCakePreview();
+        });
+    </script>
+</body>
+</html>
