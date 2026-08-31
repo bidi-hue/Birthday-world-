@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday For You 🎀</title>
+<style>
+:root{
+  --pink:#e985a0;--deep:#9b4d67;--soft:#fff2f6;--card:#fffafb;
+  --ink:#5c4048;--line:#f2c5d2;--lav:#d9ccff;--green:#6e9b75;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink);background:
+  radial-gradient(circle at 15% 10%,#fff 0 10%,transparent 30%),
+  radial-gradient(circle at 90% 20%,#ffe2ec 0 8%,transparent 28%),
+  linear-gradient(135deg,#fff5f8,#fff0f4 45%,#f8f0ff);
+  overflow-x:hidden;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.top{
+  width:min(900px,calc(100% - 28px));margin:auto;padding:18px 0 8px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.brand{font-weight:800;color:var(--deep);letter-spacing:.02em}
+.music{
+  border:1px solid var(--line);background:#ffffffc9;color:var(--deep);
+  border-radius:999px;padding:9px 14px;font-size:13px;font-weight:700;
+}
+.progress{height:5px;background:#f7dbe3;width:100%}
+.progress>i{display:block;height:100%;background:var(--pink);width:11%;transition:width .4s}
+main{width:min(900px,calc(100% - 28px));margin:auto;padding:12px 0 42px}
+.screen{display:none;animation:rise .45s ease}
+.screen.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h1,h2{font-family:Georgia,"Times New Roman",serif;color:var(--deep);margin:.25em 0}
+h1{font-size:clamp(30px,7vw,58px);line-height:1.02}
+h2{font-size:clamp(25px,5vw,38px)}
+p{line-height:1.55}
+.center{text-align:center}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:900;color:var(--pink)}
+.card{
+  background:#ffffffd9;border:1px solid var(--line);border-radius:28px;
+  padding:22px;box-shadow:0 14px 35px #a84f6714;backdrop-filter:blur(8px);
+}
+.hero{padding:55px 10px 25px;text-align:center}
+.hero .mascot{font-size:70px;animation:float 3.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-9px) rotate(2deg)}}
+.primary,.secondary{
+  border:0;border-radius:999px;padding:13px 21px;font-weight:800;
+  transition:.2s;min-height:46px
+}
+.primary{background:var(--pink);color:white;box-shadow:0 8px 18px #c35e7a33}
+.primary:hover{transform:translateY(-2px)}
+.secondary{background:white;color:var(--deep);border:1px solid var(--line)}
+.form{max-width:560px;margin:22px auto}
+label{display:block;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--deep);margin-bottom:7px}
+input,select,textarea{
+  width:100%;border:1px solid var(--line);border-radius:14px;background:white;
+  padding:12px 13px;outline:none;color:var(--ink);font-size:16px;
+}
+textarea{resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px #e985a022}
+.field{margin-bottom:17px}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.choice{
+  min-height:52px;text-align:left;border:1px solid var(--line);border-radius:15px;
+  background:white;padding:11px;font-weight:750;color:var(--ink)
+}
+.choice.selected{border:2px solid var(--pink);background:#fff0f5}
+.dark-stage{
+  min-height:410px;border-radius:30px;padding:50px 22px;text-align:center;color:white;
+  background:radial-gradient(circle at 50% 35%,#62435f,#251a31 60%,#171320);
+  position:relative;overflow:hidden
+}
+.dark-stage .star{position:absolute;color:#ffe9a8;animation:twinkle 1.7s infinite alternate}
+@keyframes twinkle{to{opacity:.25;transform:scale(.7)}}
+.dark-stage .moon{font-size:62px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.preview{
+  min-height:350px;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;background:linear-gradient(#fff,#fff1f5);overflow:hidden
+}
+.cake-scene{width:250px;height:235px;position:relative;margin:auto}
+.cake{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:190px;height:110px}
+.tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:18px 18px 24px 24px;border:3px solid #fff;box-shadow:0 8px 14px #6c405022}
+.tier.bottom{bottom:0;width:190px;height:78px;background:var(--cake-color,#ffc9d8)}
+.tier.top{bottom:58px;width:130px;height:58px;background:var(--cake-color,#ffc9d8)}
+.drip{position:absolute;top:0;left:10px;right:10px;height:24px;border-radius:50%;background:#fff7fb}
+.drip:before,.drip:after{content:"";position:absolute;background:#fff7fb;width:18px;height:28px;border-radius:0 0 14px 14px;top:9px}
+.drip:before{left:35px}.drip:after{right:42px}
+.cake-deco{position:absolute;left:0;right:0;top:12px;text-align:center;font-size:20px;letter-spacing:5px}
+.cake-msg{position:absolute;bottom:-28px;width:100%;text-align:center;font:700 13px Georgia;color:var(--deep)}
+.candle-row{position:absolute;left:50%;top:15px;transform:translateX(-50%);display:flex;gap:8px;z-index:4}
+.candle{display:flex;flex-direction:column;align-items:center}
+.flame{font-size:15px;animation:flicker .65s infinite alternate}
+@keyframes flicker{to{transform:scale(.8) translateY(2px);opacity:.65}}
+.candle-num{width:22px;height:31px;border-radius:5px;background:#fff;border:2px solid #f3b8c8;color:var(--deep);font-weight:900;display:grid;place-items:center;font-size:12px}
+.controls .field:last-child{margin-bottom:0}
+.color-row{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:38px;height:38px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 1px var(--line)}
+.swatch.selected{box-shadow:0 0 0 3px var(--pink)}
+.gift-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.gift-options{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.gift-option{
+  border:1px solid var(--line);background:white;border-radius:15px;padding:13px;
+  text-align:center;font-weight:750;min-height:72px
+}
+.gift-option.selected{border:2px solid var(--pink);background:#fff0f5}
+.gift-option .mini{display:block;font-size:28px;margin-bottom:3px}
+.gift-stage{
+  min-height:350px;display:grid;place-items:center;background:linear-gradient(#fff8fb,#f4edff);
+  border-radius:24px;position:relative;overflow:hidden
+}
+.gift-box{width:170px;height:145px;position:relative;transform-origin:bottom;transition:.7s}
+.box-body{
+  position:absolute;left:15px;right:15px;bottom:0;height:95px;border-radius:5px 5px 18px 18px;
+  background:linear-gradient(90deg,#f4a5b8,#df7897);border:4px solid #fff
+}
+.box-lid{
+  position:absolute;left:4px;right:4px;top:20px;height:43px;border-radius:12px;
+  background:#f5a6ba;border:4px solid #fff;z-index:4;transform-origin:10% 90%;transition:1s
+}
+.ribbon-v{position:absolute;left:50%;transform:translateX(-50%);top:20px;bottom:0;width:24px;background:#fff2c9;z-index:5}
+.bow{position:absolute;left:50%;top:2px;transform:translateX(-50%);font-size:45px;z-index:6}
+.teddy{
+  position:absolute;left:50%;bottom:28px;transform:translateX(-50%) scale(.15);
+  opacity:0;transition:1s cubic-bezier(.2,.8,.2,1);z-index:3;font-size:128px
+}
+.gift-stage.open .box-lid{transform:rotate(-32deg) translate(-8px,-42px)}
+.gift-stage.open .gift-box{animation:giftBounce .8s}
+.gift-stage.open .teddy{transform:translateX(-50%) scale(1);opacity:1}
+.gift-stage.open .box-body{opacity:.75}
+@keyframes giftBounce{50%{transform:translateY(-8px)}}
+.open-hint{position:absolute;bottom:18px;font-size:12px;font-weight:800;color:var(--deep)}
+.flower-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.flower-card{
+  background:white;border:1px solid var(--line);border-radius:19px;padding:13px;text-align:center;
+}
+.flower-card.selected{border:2px solid var(--pink);background:#fff2f6}
+.flower-art{height:88px;display:grid;place-items:center}
+.flower-art svg{width:82px;height:82px;overflow:visible}
+.flower-name{font-weight:850;font-size:13px;color:var(--deep)}
+.qty{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:8px}
+.qty button{width:34px;height:34px;border:0;border-radius:50%;background:#ffe2eb;color:var(--deep);font-weight:900}
+.qty b{min-width:20px}
+.bouquet-stage{
+  min-height:430px;border-radius:28px;background:
+  radial-gradient(circle at 50% 32%,#fff 0 18%,transparent 38%),
+  linear-gradient(#fff6fa,#f8efff);
+  display:grid;place-items:center;position:relative;overflow:hidden
+}
+.bouquet{width:310px;height:360px;position:relative}
+.stem{position:absolute;bottom:72px;left:50%;width:5px;height:210px;background:#6d9a70;border-radius:99px;transform-origin:bottom}
+.wrap{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:190px;height:155px;
+  background:linear-gradient(90deg,#f1b5a2,#ffd0c0);clip-path:polygon(13% 0,87% 0,100% 100%,0 100%);border-radius:8px}
+.bow-final{position:absolute;bottom:75px;left:50%;transform:translateX(-50%);font-size:58px;z-index:8}
+.bouquet-flower{position:absolute;font-size:48px;filter:drop-shadow(0 4px 3px #67404a22);z-index:6}
+.ribbon-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ribbon-btn{border:1px solid var(--line);background:white;border-radius:14px;padding:12px;font-weight:750}
+.ribbon-btn.selected{border:2px solid var(--pink)}
+.ribbon-dot{display:inline-block;width:18px;height:18px;border-radius:50%;vertical-align:middle;margin-right:7px}
+.final-art{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.final-card{padding:17px;border-radius:22px;background:#fff4f7;border:1px solid var(--line)}
+.final-mini{min-height:190px;display:grid;place-items:center}
+.confetti{position:fixed;top:-20px;z-index:99;pointer-events:none;animation:fall 2.2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(500deg);opacity:0}}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.small{font-size:12px;opacity:.72}
+@media(max-width:680px){
+  .grid2,.gift-layout,.final-art{grid-template-columns:1fr}
+  .flower-grid{grid-template-columns:repeat(2,1fr)}
+  .preview{min-height:310px}
+  .choice-grid{grid-template-columns:1fr}
+  .gift-stage{min-height:310px}
+  .top{align-items:flex-start}
+  .brand{font-size:13px}
+}
+@media(max-width:380px){
+  main,.top{width:min(100% - 18px,900px)}
+  .card{padding:17px;border-radius:22px}
+  .flower-grid{gap:8px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">🎀 A Little Birthday For You</div>
+  <button class="music" id="musicBtn" type="button">🎵 Play a tiny melody</button>
+</header>
+<div class="progress"><i id="progress"></i></div>
+
+<main>
+<section class="screen active" id="s1">
+  <div class="hero">
+    <div class="mascot">🧸✨</div>
+    <div class="eyebrow">a tiny birthday world</div>
+    <h1>A Little Birthday<br>Made Just For You</h1>
+    <p>Choose your cake. Open your gift. Pick real-looking flowers and build your own bouquet.</p>
+    <button class="primary" type="button" data-next="2">Start my birthday ♡</button>
+  </div>
+</section>
+
+<section class="screen" id="s2">
+  <div class="center">
+    <div class="eyebrow">first things first</div>
+    <h2>Tell me who we're celebrating</h2>
+    <p class="small">Your answers only shape this little experience.</p>
+  </div>
+  <form class="card form" id="detailsForm">
+    <div class="field">
+      <label for="name">Your name</label>
+      <input id="name" maxlength="30" placeholder="e.g. Ananya" required>
+    </div>
+    <div class="field">
+      <label for="age">Age you're turning</label>
+      <input id="age" type="number" min="1" max="120" placeholder="21" required>
+    </div>
+    <div class="field">
+      <label>Birthday vibe</label>
+      <div class="choice-grid" id="vibes">
+        <button class="choice selected" type="button" data-vibe="Soft Pink">🎀 Soft Pink</button>
+        <button class="choice" type="button" data-vibe="Garden">🌷 Pretty Garden</button>
+        <button class="choice" type="button" data-vibe="Strawberry">🍓 Strawberry Sweet</button>
+        <button class="choice" type="button" data-vibe="Dreamy">✨ Dreamy & Magical</button>
+      </div>
+    </div>
+    <button class="primary" type="submit">Let's make it →</button>
+  </form>
+</section>
+
+<section class="screen" id="s3">
+  <div class="dark-stage">
+    <span class="star" style="left:12%;top:15%">✦</span><span class="star" style="right:13%;top:24%">✧</span>
+    <span class="star" style="left:24%;bottom:22%">✦</span><span class="star" style="right:23%;bottom:18%">✧</span>
+    <div class="moon">🌙</div>
+    <h2 style="color:#ffd7e3" id="lightsTitle">Wait...</h2>
+    <p id="lightsText">Someone forgot to turn on the lights.</p>
+    <button class="primary" id="lightsBtn" type="button">Turn on the lights ✨</button>
+  </div>
+</section>
+
+<section class="screen" id="s4">
+  <div class="center">
+    <div class="eyebrow">the grand reveal</div>
+    <h2 id="birthdayHeading">HAPPY BIRTHDAY ♡</h2>
+    <p>Okay. Now let's actually build the birthday.</p>
+  </div>
+  <div class="card preview">
+    <div class="cake-scene" id="partyCake">
+      <div class="candle-row" id="partyCandles"></div>
+      <div class="cake">
+        <div class="tier top"><div class="drip"></div><div class="cake-deco">♡ ✿ ♡</div></div>
+        <div class="tier bottom"><div class="drip"></div></div>
+      </div>
+      <div class="cake-msg">made with love ♡</div>
+    </div>
+    <button class="primary" type="button" data-next="5">Design my cake →</button>
+  </div>
+</section>
+
+<section class="screen" id="s5">
+  <div class="center"><div class="eyebrow">part one</div><h2>Design your anime-style cake</h2><p class="small">The preview changes as you choose.</p></div>
+  <div class="grid2">
+    <div class="card preview">
+      <div class="cake-scene" id="cakePreview">
+        <div class="candle-row" id="previewCandles"></div>
+        <div class="cake">
+          <div class="tier top"><div class="drip"></div><div class="cake-deco" id="cakeDecoArt">♡ ✿ ♡</div></div>
+          <div class="tier bottom"><div class="drip"></div></div>
+        </div>
+        <div class="cake-msg" id="cakeMessagePreview">Happy Birthday ♡</div>
+      </div>
+    </div>
+    <div class="card controls">
+      <div class="field">
+        <label>Cake style</label>
+        <div class="choice-grid">
+          <button class="choice selected cakeShape" type="button" data-shape="Round">🎂 Round</button>
+          <button class="choice cakeShape" type="button" data-shape="Heart">💗 Heart</button>
+          <button class="choice cakeShape" type="button" data-shape="Two-tier">🍰 Two-tier</button>
+          <button class="choice cakeShape" type="button" data-shape="Star">⭐ Star</button>
+        </div>
+      </div>
+      <div class="field"><label for="flavour">Flavour</label><select id="flavour">
+        <option>Strawberry</option><option>Chocolate</option><option>Vanilla</option><option>Red Velvet</option>
+      </select></div>
+      <div class="field">
+        <label>Frosting</label>
+        <div class="color-row">
+          <button class="swatch selected" type="button" data-color="#ffc9d8" style="background:#ffc9d8" aria-label="Blush pink"></button>
+          <button class="swatch" type="button" data-color="#fff3d6" style="background:#fff3d6" aria-label="Cream"></button>
+          <button class="swatch" type="button" data-color="#dcd1ff" style="background:#dcd1ff" aria-label="Lavender"></button>
+          <button class="swatch" type="button" data-color="#ffcdb6" style="background:#ffcdb6" aria-label="Peach"></button>
+          <button class="swatch" type="button" data-color="#cde6cf" style="background:#cde6cf" aria-label="Sage"></button>
+        </div>
+      </div>
+      <div class="field"><label for="decoration">Decoration</label><select id="decoration">
+        <option value="♡ ✿ ♡">Flowers</option><option value="♡ ♥ ♡">Hearts</option><option value="· • · • ·">Pearls</option><option value="✦ ✧ ✦">Sparkles</option><option value="🎀">Bows</option>
+      </select></div>
+      <div class="field"><label for="cakeMessage">Cake message</label><input id="cakeMessage" maxlength="32" value="Happy Birthday ♡"></div>
+      <div class="field"><label for="cakeNote">Extra cake details</label><textarea id="cakeNote" rows="3" placeholder="Tiny strawberries, white bows, cute anime details..."></textarea></div>
+      <button class="primary" type="button" data-next="6">This is my cake ♡</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="s6">
+  <div class="center"><div class="eyebrow">part two</div><h2>Pick a gift</h2><p>And then you'll actually get to open it.</p></div>
+  <div class="gift-layout">
+    <div class="card">
+      <div class="gift-options" id="giftOptions">
+        <button class="gift-option selected" type="button" data-gift="Teddy Bear" data-emoji="🧸"><span class="mini">🧸</span>Teddy Bear</button>
+        <button class="gift-option" type="button" data-gift="Headphones" data-emoji="🎧"><span class="mini">🎧</span>Headphones</button>
+        <button class="gift-option" type="button" data-gift="A Book" data-emoji="📖"><span class="mini">📖</span>A Book</button>
+        <button class="gift-option" type="button" data-gift="Jewellery" data-emoji="💎"><span class="mini">💎</span>Jewellery</button>
+        <button class="gift-option" type="button" data-gift="Camera" data-emoji="📷"><span class="mini">📷</span>Camera</button>
+        <button class="gift-option" type="button" data-gift="Something Magical" data-emoji="✨"><span class="mini">✨</span>Magical</button>
+      </div>
+      <div class="field" style="margin-top:15px"><label for="customGift">Or write your own</label><input id="customGift" maxlength="40" placeholder="A plushie, perfume, sketchbook..."></div>
+      <button class="primary" id="wrapGiftBtn" type="button">Wrap my gift 🎀</button>
+    </div>
+    <div class="gift-stage" id="giftStage" aria-live="polite">
+      <div class="gift-box">
+        <div class="teddy" id="teddy">🧸</div>
+        <div class="box-lid"></div>
+        <div class="box-body"></div>
+        <div class="ribbon-v"></div>
+        <div class="bow">🎀</div>
+      </div>
+      <div class="open-hint" id="giftHint">Tap the gift box to open it</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="s7">
+  <div class="center"><div class="eyebrow">part three</div><h2>Build your bouquet</h2><p>You're choosing the actual flowers now — not just their names.</p></div>
+  <div class="card">
+    <div class="flower-grid" id="flowerGrid"></div>
+  </div>
+  <div class="actions"><button class="primary" type="button" data-next="8">See my bouquet →</button></div>
+</section>
+
+<section class="screen" id="s8">
+  <div class="center"><div class="eyebrow">your bouquet</div><h2>Arrange it with a ribbon</h2><p>Every flower you picked appears in the bouquet.</p></div>
+  <div class="grid2">
+    <div class="bouquet-stage card"><div class="bouquet" id="bouquet"></div></div>
+    <div class="card">
+      <div class="field"><label>Ribbon</label><div class="ribbon-picker" id="ribbonPicker">
+        <button class="ribbon-btn selected" type="button" data-ribbon="#ffc2d1"> <span class="ribbon-dot" style="background:#ffc2d1"></span>Blush</button>
+        <button class="ribbon-btn" type="button" data-ribbon="#c9a9e8"><span class="ribbon-dot" style="background:#c9a9e8"></span>Lavender</button>
+        <button class="ribbon-btn" type="button" data-ribbon="#9fc5a8"><span class="ribbon-dot" style="background:#9fc5a8"></span>Sage</button>
+        <button class="ribbon-btn" type="button" data-ribbon="#a9d5e8"><span class="ribbon-dot" style="background:#a9d5e8"></span>Baby Blue</button>
+        <button class="ribbon-btn" type="button" data-ribbon="#e6b29e"><span class="ribbon-dot" style="background:#e6b29e"></span>Peach</button>
+        <button class="ribbon-btn" type="button" data-ribbon="#f2e7bd"><span class="ribbon-dot" style="background:#f2e7bd"></span>Cream</button>
+      </div></div>
+      <div class="card" style="background:#fff6f8;padding:15px">
+        <b id="flowerSummary">No flowers selected yet.</b>
+        <p class="small">Add as many as you want. The bouquet updates instantly.</p>
+      </div>
+      <button class="primary" id="finalRevealBtn" type="button">Show me my birthday ♡</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="s9">
+  <div class="center">
+    <div class="eyebrow">the finished gift</div>
+    <h2 id="finalTitle">Happy Birthday ♡</h2>
+    <p>This is the little birthday world you designed.</p>
+  </div>
+  <div class="card final-art">
+    <div class="final-card"><div class="eyebrow">your cake</div><div class="final-mini"><div class="cake-scene" id="finalCake"></div></div><b id="finalCakeText"></b></div>
+    <div class="final-card"><div class="eyebrow">your gift</div><div class="final-mini" id="finalGift">🎁</div><b id="finalGiftText"></b></div>
+    <div class="final-card" style="grid-column:1/-1"><div class="eyebrow">your bouquet</div><div class="bouquet-stage" style="min-height:360px"><div class="bouquet" id="finalBouquet"></div></div></div>
+  </div>
+  <div class="center actions"><button class="primary" id="restart" type="button">Start over ↺</button></div>
+</section>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+const state={
+  screen:1,name:"Friend",age:21,vibe:"Soft Pink",
+  cake:{shape:"Round",color:"#ffc9d8",flavour:"Strawberry",decoration:"♡ ✿ ♡",message:"Happy Birthday ♡",note:""},
+  gift:{name:"Teddy Bear",emoji:"🧸"},
+  flowers:{},
+  ribbon:"#ffc2d1"
+};
+
+const flowers=[
+ {id:"rose",name:"Rose",color:"#ed718d",center:"#f5bd61",petal:5},
+ {id:"tulip",name:"Tulip",color:"#ef7fa1",center:"#f2c56d",petal:5},
+ {id:"sunflower",name:"Sunflower",color:"#f3c54f",center:"#9a694d",petal:10},
+ {id:"daisy",name:"Daisy",color:"#fffdf7",center:"#e7b84d",petal:9},
+ {id:"lavender",name:"Lavender",color:"#aa8fd6",center:"#7d629f",petal:7},
+ {id:"peony",name:"Peony",color:"#f49ab1",center:"#f4c36b",petal:12},
+ {id:"cherry",name:"Cherry Blossom",color:"#f3a7c2",center:"#e4ad5c",petal:5},
+ {id:"orchid",name:"Orchid",color:"#c88fd5",center:"#f2c45f",petal:5},
+ {id:"lily",name:"Lily",color:"#fff8dc",center:"#e5ad50",petal:6}
+];
+
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+
+function go(n){
+  $$(".screen").forEach(x=>x.classList.remove("active"));
+  const el=$("#s"+n); if(!el)return;
+  el.classList.add("active"); state.screen=n;
+  $("#progress").style.width=({1:11,2:22,3:33,4:44,5:55,6:66,7:77,8:88,9:100}[n]||100)+"%";
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(n===7) renderFlowerShop();
+  if(n===8) renderBouquet($("#bouquet"));
+}
+
+$$("[data-next]").forEach(b=>b.addEventListener("click",()=>go(Number(b.dataset.next))));
+
+$("#detailsForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("#name").value.trim(), age=Number($("#age").value);
+  if(!name){alert("Please enter your name.");return}
+  if(!Number.isFinite(age)||age<1||age>120){alert("Enter an age from 1 to 120.");return}
+  state.name=name; state.age=Math.floor(age);
+  $("#birthdayHeading").textContent="HAPPY BIRTHDAY, "+name.toUpperCase()+" ♡";
+  $("#lightsTitle").textContent="Wait, "+name+"...";
+  renderCandles($("#partyCandles"));
+  renderCandles($("#previewCandles"));
+  go(3);
+});
+
+$$("[data-vibe]").forEach(b=>b.addEventListener("click",()=>{
+  $$("#vibes .choice").forEach(x=>x.classList.remove("selected"));
+  b.classList.add("selected");state.vibe=b.dataset.vibe;
+}));
+
+$("#lightsBtn").addEventListener("click",()=>go(4));
+
+function renderCandles(container){
+  container.innerHTML="";
+  String(state.age).split("").forEach(n=>{
+    const c=document.createElement("div");c.className="candle";
+    c.innerHTML='<span class="flame">🔥</span><span class="candle-num">'+n+"</span>";
+    container.appendChild(c);
+  });
+}
+
+function shapeStyle(shape){
+  const top=$("#cakePreview .top"), bottom=$("#cakePreview .bottom");
+  if(shape==="Heart"){
+    top.style.borderRadius="50% 50% 18px 18px"; bottom.style.borderRadius="48% 48% 22px 22px";
+  }else if(shape==="Star"){
+    top.style.clipPath="polygon(50% 0%,61% 34%,98% 35%,68% 56%,79% 92%,50% 70%,21% 92%,32% 56%,2% 35%,39% 34%)";
+    bottom.style.clipPath="polygon(50% 0%,61% 34%,98% 35%,68% 56%,79% 92%,50% 70%,21% 92%,32% 56%,2% 35%,39% 34%)";
+  }else{
+    top.style.clipPath="none";bottom.style.clipPath="none";
+    top.style.borderRadius=shape==="Two-tier"?"18px 18px 10px 10px":"18px 18px 24px 24px";
+    bottom.style.borderRadius="18px 18px 24px 24px";
+  }
+}
+
+function updateCake(){
+  state.cake.flavour=$("#flavour").value;
+  state.cake.decoration=$("#decoration").value;
+  state.cake.message=$("#cakeMessage").value.trim()||"Happy Birthday ♡";
+  state.cake.note=$("#cakeNote").value.trim();
+  const scene=$("#cakePreview");
+  scene.style.setProperty("--cake-color",state.cake.color);
+  $("#cakeDecoArt").textContent=state.cake.decoration;
+  $("#cakeMessagePreview").textContent=state.cake.message;
+  shapeStyle(state.cake.shape);
+  renderCandles($("#previewCandles"));
+}
+$$(".cakeShape").forEach(b=>b.addEventListener("click",()=>{
+  $$(".cakeShape").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");
+  state.cake.shape=b.dataset.shape;updateCake();
+}));
+$$(".swatch").forEach(b=>b.addEventListener("click",()=>{
+  $$(".swatch").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");
+  state.cake.color=b.dataset.color;updateCake();
+}));
+["flavour","decoration","cakeMessage","cakeNote"].forEach(id=>$("#"+id).addEventListener("input",updateCake));
+["flavour","decoration"].forEach(id=>$("#"+id).addEventListener("change",updateCake));
+
+$$(".gift-option").forEach(b=>b.addEventListener("click",()=>{
+  $$(".gift-option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");
+  state.gift={name:b.dataset.gift,emoji:b.dataset.emoji};
+}));
+$("#customGift").addEventListener("input",()=>{
+  const v=$("#customGift").value.trim(); if(v)state.gift={name:v,emoji:"🎁"};
+});
+
+$("#wrapGiftBtn").addEventListener("click",()=>{
+  $("#giftStage").classList.remove("open");
+  $("#giftHint").textContent="Tap the gift box to open it";
+  setTimeout(()=>{$("#giftStage").classList.add("open");$("#giftHint").textContent="🎁 Surprise! Tap again to close it";},220);
+});
+$("#giftStage").addEventListener("click",()=>{
+  const open=$("#giftStage").classList.toggle("open");
+  $("#giftHint").textContent=open?"🎁 Surprise! Tap again to close it":"Tap the gift box to open it";
+});
+
+function flowerSVG(f){
+  const petals=[];
+  for(let i=0;i<f.petal;i++){
+    const a=(360/f.petal)*i;
+    petals.push('<ellipse cx="50" cy="35" rx="11" ry="23" fill="'+f.color+'" transform="rotate('+a+' 50 50)"/>');
+  }
+  return '<svg viewBox="0 0 100 100" aria-hidden="true">'+
+    '<path d="M50 55 C48 70 49 86 47 99" stroke="#67936d" stroke-width="5" fill="none" stroke-linecap="round"/>'+
+    petals.join("")+'<circle cx="50" cy="50" r="12" fill="'+f.center+'"/>'+
+    '<circle cx="46" cy="46" r="3" fill="#fff8" /></svg>';
+}
+
+function renderFlowerShop(){
+  const grid=$("#flowerGrid");grid.innerHTML="";
+  flowers.forEach(f=>{
+    const count=state.flowers[f.id]||0;
+    const card=document.createElement("div");card.className="flower-card"+(count?" selected":"");
+    card.innerHTML='<div class="flower-art">'+flowerSVG(f)+'</div><div class="flower-name">'+f.name+
+      '</div><div class="qty"><button type="button" data-minus>-</button><b>'+count+
+      '</b><button type="button" data-plus>+</button></div>';
+    card.querySelector("[data-minus]").addEventListener("click",()=>changeFlower(f.id,-1));
+    card.querySelector("[data-plus]").addEventListener("click",()=>changeFlower(f.id,1));
+    grid.appendChild(card);
+  });
+}
+function changeFlower(id,d){
+  state.flowers[id]=Math.max(0,(state.flowers[id]||0)+d);
+  if(!state.flowers[id])delete state.flowers[id];
+  renderFlowerShop();
+}
+
+function renderBouquet(container){
+  container.innerHTML="";
+  const entries=[];
+  Object.entries(state.flowers).forEach(([id,count])=>{
+    const f=flowers.find(x=>x.id===id);
+    for(let i=0;i<Math.min(count,5);i++)entries.push(f);
+  });
+  const display=entries.length?entries:[flowers[0],flowers[3],flowers[1]];
+  display.forEach((f,i)=>{
+    const el=document.createElement("div");el.className="bouquet-flower";
+    el.innerHTML=flowerSVG(f);
+    el.style.width="75px";el.style.height="75px";
+    const x=50+Math.sin(i*1.7)*28, y=12+(i%4)*11;
+    el.style.left=x+"%";el.style.top=y+"%";
+    el.style.transform="translate(-50%,-50%) rotate("+((i%3-1)*7)+"deg)";
+    container.appendChild(el);
+    const stem=document.createElement("div");stem.className="stem";
+    stem.style.left=(48+Math.sin(i*1.7)*12)+"%";
+    stem.style.height=(175+(i%3)*18)+"px";
+    stem.style.transform="rotate("+((i%3-1)*9)+"deg)";
+    container.appendChild(stem);
+  });
+  const wrap=document.createElement("div");wrap.className="wrap";container.appendChild(wrap);
+  const bow=document.createElement("div");bow.className="bow-final";bow.textContent="🎀";
+  bow.style.filter="hue-rotate(0deg)";container.appendChild(bow);
+  // ribbon is represented by a CSS pseudo-free element
+  wrap.style.background="linear-gradient(90deg,"+state.ribbon+",#ffdce6)";
+  const total=Object.values(state.flowers).reduce((a,b)=>a+b,0);
+  $("#flowerSummary").textContent=total?total+" flower"+(total===1?"":"s")+" selected ♡":"No flowers selected yet.";
+}
+
+$$("[data-ribbon]").forEach(b=>b.addEventListener("click",()=>{
+  $$("#ribbonPicker .ribbon-btn").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");
+  state.ribbon=b.dataset.ribbon;renderBouquet($("#bouquet"));
+}));
+
+$("#finalRevealBtn").addEventListener("click",()=>{
+  $("#finalTitle").textContent="Happy Birthday, "+state.name+" ♡";
+  const finalCake=$("#finalCake");
+  finalCake.innerHTML=
+    '<div class="cake" style="bottom:35px"><div class="tier top"><div class="drip"></div><div class="cake-deco">'+escapeHTML(state.cake.decoration)+'</div></div><div class="tier bottom"><div class="drip"></div></div></div>'+
+    '<div class="candle-row" id="finalCandles"></div><div class="cake-msg">'+escapeHTML(state.cake.message)+'</div>';
+  finalCake.style.setProperty("--cake-color",state.cake.color);
+  finalCake.querySelector(".top").style.background=state.cake.color;
+  finalCake.querySelector(".bottom").style.background=state.cake.color;
+  renderCandles($("#finalCandles"));
+  $("#finalCakeText").textContent=state.cake.flavour+" • "+state.cake.shape+" cake";
+  $("#finalGift").textContent=state.gift.emoji;
+  $("#finalGiftText").textContent=state.gift.name;
+  renderBouquet($("#finalBouquet"));
+  go(9);confetti();
+});
+
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function confetti(){
+  const chars=["✦","♡","✿","✨","🎀","🌸"];
+  for(let i=0;i<28;i++){
+    const e=document.createElement("span");e.className="confetti";
+    e.textContent=chars[Math.floor(Math.random()*chars.length)];
+    e.style.left=Math.random()*100+"%";e.style.animationDelay=(Math.random()*.7)+"s";
+    e.style.fontSize=(14+Math.random()*16)+"px";document.body.appendChild(e);
+    setTimeout(()=>e.remove(),3000);
+  }
+}
+$("#restart").addEventListener("click",()=>{
+  state.name="Friend";state.age=21;state.flowers={};state.gift={name:"Teddy Bear",emoji:"🧸"};
+  $("#name").value="";$("#age").value="";
+  $("#giftStage").classList.remove("open");
+  go(1);
+});
+
+let audioCtx=null,playing=false,timer=null;
+$("#musicBtn").addEventListener("click",()=>{
+  if(playing){stopMusic();return}
+  try{
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();playing=true;
+    $("#musicBtn").textContent="🔊 Playing";
+    const notes=[261.63,329.63,392,329.63,349.23,293.66,261.63];
+    let i=0;
+    const next=()=>{
+      if(!playing)return;
+      const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+      o.type="sine";o.frequency.value=notes[i%notes.length];
+      g.gain.setValueAtTime(.055,audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.42);
+      o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+.42);
+      i++;timer=setTimeout(next,470);
+    };next();
+  }catch(err){alert("Your browser blocked the melody. The birthday site still works normally.")}
+});
+function stopMusic(){
+  playing=false;if(timer)clearTimeout(timer);
+  if(audioCtx){audioCtx.close();audioCtx=null}
+  $("#musicBtn").textContent="🎵 Play a tiny melody";
+}
+
+renderCandles($("#partyCandles"));updateCake();renderFlowerShop();
+})();
+</script>
+</body>
+</html>
